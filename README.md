@@ -7,7 +7,7 @@ main scripts
 + population
 + community
 
-the whole code can be found in Code folder
+> the whole code can be found in Code folder
 
 ## How exam works 📖
 build one's project based on following steps
