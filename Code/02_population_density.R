@@ -34,9 +34,11 @@ plot(elevation)
 
 # i just want the first element from bei.extra using [[]] and a number 1 without using $
 
-elevation <- bei.extra[[1]]
+elevation2 <- bei.extra[[1]]
 # or if i have just an object 
-plot(bei.extra[[1]])
+plot(bei.extra[[1]]) # [[]] more powerful beacause i dont'have to remember the name of the element i need
+plot(elevation2)
+
 
 # density is the function inside spatstat to calculate densuty of population
 # density map starting from points
@@ -49,4 +51,43 @@ plot(densitymap)
 points(bei) # puts point on prevoius graph plot(densitymap)
 points(bei, col="green")
 
+######DAY2
+# multiframe with par.function
 
+par(mfrow=c(1,2)) # 1 and 2 are elements of the same arrow 
+
+#now put sets in the elements
+
+plot(elevation2)
+plot(densitymap)
+# the order is set like this sx elev2 a dx density
+# if i want one above the other i'd have 2 rows and 1 coloumn
+ par(mfrow=c(2,1))
+
+#if i want again just one map at the centre of the screen and not above or at a side
+# i use dev.off() control multiple devides. destroys the device null device
+
+dev.off()
+
+#changing colours to map
+cl <- colorRampPalette(c("red", "orange", "yellow")) (3)
+# watch out capital letters 
+# elements of the same arrow so use c()
+# stating (3) is for gradients but the gradients are written like taht in brakets
+# assign it to an obj
+plot(densitymap, col=cl)
+
+# let's increase the amount of gradients 
+cl <- colorRampPalette(c("red", "orange", "yellow")) (100)
+
+# exercise: change teh color ramp palette using different colors 
+# search colors in R Columbia university for gradients
+
+# exercise: build a multiframe and plot the densitymapwith two different color ramp palette
+par(mfrow=c(1,2))
+cl <- colorRampPalette(c("palegreen", "purple3", "orange3")) (100)
+plot(densitymap, col=cl)
+cl <- colorRampPalette(c("olivedrab2", "orange1", "red3")) (100)
+plot(densitymap, col=cl)
+
+# dev.off() to kill everything
