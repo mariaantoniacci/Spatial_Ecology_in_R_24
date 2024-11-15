@@ -24,9 +24,19 @@ View(dune) # to see back the all table; remember capital letter V
 # Analysis
 decorana(dune)
 multivar <- decorana(dune) 
-# 4 axis of lenghts (amount of range represented by the first axis) 
-# what the % of the original is represented by the component 1
+# the original set is compressedd to 4 axis 
+# writing decorana(dune) we obtain 4 axes (DCA1,2,3,4) 
 
+dca1 = 3.7004
+
+# each DCA is the length of axis representing the whle dataset
+# the length is the amount of range represented by the axis. 
+# the aim is to see the percentage of the original range which is incorporated in 2 axes. 
+# the maximum amount of axis we can use is 3 because our brains work in 3 dimensions.
+
+# 4 axis of lenghts (amount of range represented by the first axis) ???
+# calculate the percentage of each axies compared to the all dataset
+# what the % of the original is represented by the component 1
 
 dca1 = 3.7004
 dca2 = 3.1166
