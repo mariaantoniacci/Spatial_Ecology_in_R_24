@@ -15,7 +15,7 @@ names(kericni)
 # to see the dataset per se
 kerinci
 
-# summary gives an idea about the statics of field
+# summary gives an idea about the statistics of field
 summary(kerinci)
 # gives same individual in different times records, min and max
 
@@ -35,7 +35,7 @@ head(kerinci)
 tiger <- kerinci[kerinci$Sps=="tiger",]
 
 # the , to end the query
-# query is developed in sql as == (equal) whilw != (not equal)
+# query is developed in sql as == (equal) while != (not equal)
 
 # we plot a density plot using time from tiger data
 
