@@ -63,7 +63,7 @@ densityPlot(macaquetime)
 overlapPlot(tigertime, macaquetime)
 
 
-# --------------SQL revise
+# --------------SQL revise 
 
 macaque <- kerinci[kerinci$Sps=="macaque",]
 nomacaque <- kerinci[kerinci$Sps!="macaque",] 
