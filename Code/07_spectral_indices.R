@@ -41,3 +41,17 @@ par(mfrow=c(1,2))
 im.plotRGB(m1992, r=1, g=2, b=3)
 im.plotRGB(m2006, r=1, g=2, b=3)
 
+
+# Exercise: make a multiframe with 6 images in pairs with Nr on the same component
+# first row: m1992 and m2006 with r=1
+# second row: m1992 and m2006 g=1
+# third row: m1992 and m2006 b=1
+
+ par(mfrow=c(3,2))
+
+im.plotRGB(m1992, r=1, g=2, b=3)
+im.plotRGB(m2006, r=1, g=2, b=3)
+im.plotRGB(m1992, r=2, g=1, b=3)
+im.plotRGB(m2006, r=2, g=1, b=3)
+im.plotRGB(m1992, r=3, g=2, b=1)
+im.plotRGB(m2006, r=3, g=2, b=1)
