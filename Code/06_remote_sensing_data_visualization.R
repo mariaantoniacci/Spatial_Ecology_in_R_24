@@ -93,4 +93,4 @@ im.plotRGB(sentstack, r=3, g=2, b=1)
 # facciamo scorrere i numeri we get false colours image so to add additional information that our eyes cannot perceive
 im.plotRGB(sentstack, r=4, g=3, b=2) 
 
-# why do that? vegetation is now represented by red 
+# why do that? vegetation is now represented by infrared 
