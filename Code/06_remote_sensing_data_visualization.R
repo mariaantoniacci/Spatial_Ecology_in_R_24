@@ -93,4 +93,27 @@ im.plotRGB(sentstack, r=3, g=2, b=1)
 # facciamo scorrere i numeri we get false colours image so to add additional information that our eyes cannot perceive
 im.plotRGB(sentstack, r=4, g=3, b=2) 
 
-# why do that? vegetation is now represented by infrared 
+# why do that? vegetation is now represented by infrared because vegetation reflects a lot in NIR
+# it's common to put NIR on top of red band of RGB
+
+
+# let's try to put NIR on top of green band obtaining another false colour image
+im.plotRGB(sentstack, r=3, g=4, b=2)
+
+# NIR on top of blue band
+im.plotRGB(sentstack, r=3, g=2, b=4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
