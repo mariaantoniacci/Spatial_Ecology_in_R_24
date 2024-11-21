@@ -55,3 +55,22 @@ im.plotRGB(m1992, r=2, g=1, b=3)
 im.plotRGB(m2006, r=2, g=1, b=3)
 im.plotRGB(m1992, r=3, g=2, b=1)
 im.plotRGB(m2006, r=3, g=2, b=1)
+
+# Difference vegetation iNdex in 1992
+# we stated that 1st element is NiR and 2nd element is red 
+dvi1992= m1992[[1]] - m1992[[2]]
+
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
+
+plot(dvi1992, col=cl)
+
+# dvi is quite high
+
+dvi2006 = m2006[[1]] - m2006[[2]]
+
+plot(dvi2006, col=cl)
+
+# very low dvi
+
+# Multiframe 
+par(mfrow=c(1,2)
