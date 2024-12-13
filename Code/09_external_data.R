@@ -5,7 +5,6 @@ library(terra)
 # download image from Nasa Earth Observatory, save it in your folder
 
 # set the working directory from which the image is taken 
-
 setwd("C://Users/anton/OneDrive/Documents/MAGISTRALE/SPATIAL ECOLOGY IN R")
 getwd()
 
