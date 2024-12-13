@@ -1,55 +1,53 @@
+# measuring spatial variability 
+
+
 # the higher the complexity, the higher the potential biodiversity 
 # rasterdiv() function to measure variability 
-# st. dev. measure over an image
+# st. dev. of reflectance values helps in measuring variability over an image, complexity of a landscape
 
 library(imageRy)
 library(terra)
-library(viridis)
+im.list()
 
 # use data from Sentinel satelite
-
-im.list()
 sent <- im.import("sentinel.png")
+
+# plot it without changing the order of the bands
 im.plotRGB(sent, r=1, g=2, b=3)
 
 # bands:
-# 1 NIR
-# 2 red 
-# 3 green 
+# 1 = NIR
+# 2 = red 
+# 3 = green 
 
-# yellow hits the retina differntly, good to use 
+# now try to change order to get even more details in yellow for example
 im.plotRGB(sent, 2,3,1) 
 
-# measuring standard deviation focal() to use variability
+# measure standard deviation on a chosen band
+
+# obj sent is made of 4 elements, let's choose only the first 
 nir <- sent[[1]]
+
+# calculate st. dev. with the function focal()
+
 stdev3 <- focal(nir, matrix(1/9, 3,3), fun=sd)
 
-# moving window is a method to measure st. dev.
-# window of 3x3 pixels 3 rows 3 cols, we extract the mean and then extract st. dev. from here
-# moving by one, again calculate mean on a window 3x3
-# matrix is the moving winddw
-# single data are single pixels so each pixel is 1 over 9 pixel
-# stdev helps us calculating variability, cause it's difficult to measure it on the image trhought colours. 
+# focal() uses a moving window as a method to measure st. dev.
+# specify:
+# image with chosen band ([[1]])
+# a matrix (2 dimensional vector) to create the moving window
+# matrix (taht is the moving window) is made of 3x3 pixels (3 rows and 3 columns)
+# argoment 1/9 to specify that i want to use 1 pixel (data) over the total 9 pixels
+# fun= to specify i want to calculate the standard deviation (sd)
 
-
-# exercise 7x7 
+# exercise: matrix of 7x7 
 stdev7 <- focal(nir, matrix(1/49, 7,7), fun=sd)
 
+# multiframe to show difference between the variabilities calculated with two differently built windows
 par(mfrow=c(1,2))
 plot(stdev3)
 plot(stdev7)
 
-# is like taking more data alltogether the wider the sample, the higher the st dev respect to original mean.
-# wider in terms of higher st dev 
-# no best windows it dependes on the issue 
-# in the first picture less variability just beacuse the window is smaller 
-
-
-
-
-
-
-
-
-
-
+# alternative using stack to plot two images together
+stdevstack <- c(stdev3, stdev7) 
+plot(stdevstack)  
