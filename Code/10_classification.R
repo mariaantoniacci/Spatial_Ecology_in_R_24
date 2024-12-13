@@ -1,12 +1,15 @@
-# correlate a pixel to its reflectance on the graph in different bands.
-# three pixel and state maybe these pixels are stricly related to each other beacuase similar reflectance.
-# or the distance of a pixel is shorten than the distace from another band 
-# this is called classification of landcover classes 
-# then i can calculate how many pixels are in the classes (obj where the pixels are taken from) 
-# example: mato grosso how many pixel there were representing forest? how many now?
-# classification type called: 
-
 # Classification in R using imageRy
+
+# correlation between a pixel ands its reflectance  in different bands in a graph x,y
+# example: 3 pixels are stricly related to each other beacause of their similar reflectance 
+# additionally, the distance between the 3 pixels belonging to the same class is shorten than the distance from another band 
+
+# this is called classification of landcover classes
+
+# once the classification is done, calculate how many pixels are in the classes (which are objects where the pixels are taken from) 
+# example mato grosso images: how many pixels there were representing forest in 1992? how many in 2006?
+
+# libraries we need:
 
 library(terra)
 library(imageRy)
@@ -21,7 +24,7 @@ sun <- im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
 
 im.classify(sun, num_clusters=3) 
 
-# specify how many clusters or classes we want by num_clusters=
+# specify how many clusters or classes we want by "num_clusters="
 # depending on the point from which algorithm starts the operation, that would be the first class (ex. medium energy)
 
 # do the same on Mato grosso to see changes in terms of cover % of forest in 1992 and 2006
