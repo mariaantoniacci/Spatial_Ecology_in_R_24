@@ -10,7 +10,7 @@ data(kerinci)
 
 # exercise: show first 6 rows of kerinci and check the name of columns
 head(kerinci)
-names(kericni)
+names(kerinci)
 
 # to see the dataset per se
 kerinci
