@@ -13,7 +13,7 @@ library(terra)
 
 sistem.file() # finds names of files in package for example the external folder
 
-system.file("external") # """ because i'm extracting a folder ?? 
+system.file("external") # """ because i'm extracting a folder 
 
 # in external i have many dataset, i want one of them called species.shp
 
@@ -30,7 +30,7 @@ file <- system.file("external/species.shp", package="sdm")
 # the function is needed because shp cannot be read by R
 vect(file) 
 
-# in the meantime dowload library(terra)
+# in the meantime download library(terra)
 
 # assign the function to an obj
 rana <- vect(file)
@@ -56,10 +56,10 @@ pres<- rana[rana$Occurrence==1 ;]
 # in sql language == meaning equal to while != not equal to
 # to end the input use ; 
 # by writing rana before []: extract from the whole dataset rana 
-# $ means: extract Occurance from rana where occurance is equal to 1
-# in R we'd use [[]] to extact data froma  dataset
+# $ means: extract Occurance from rana where occurrence is equal to 1
+# in R we'd use [[]] to extact data from a dataset
 
-# build a multiframe first image is rana, second image is pres: 
+# build a multiframe: first image is rana, second image is pres 
 par(mfrow=c(1,2))
 plot(rana)
 plot(pres)
@@ -81,7 +81,7 @@ plot(abse)
 
 # exercise plot presences in blue together with absences in red 
 plot(pres, col="blue") # open teh plot with presence and then 
-points(abse, col="red", pch=19, cex=2) # use points to highlight abseces
+points(abse, col="red", pch=19, cex=2) # use points to highlight absences
 
 # Covariates, why species distributed in a certain manner?
 # let's considerate the variable elevation 
