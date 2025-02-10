@@ -18,9 +18,9 @@ plot(bei, pch=19) # remember to put space between argumets but avoid between bra
 
 plot(bei, pch=19, cex=.5)
 
-# we can figure out how they are dispersed but not why
+# we can figure out how they are dispersed but not why they are so
 
-# additional dataset for covariates soil types, Temp., 
+# additional dataset for covariates soil types, temperature, etc. 
 bei.extra # list of pixel images raster type
 
 plot(bei.extra)
@@ -38,7 +38,7 @@ elevation2 <- bei.extra[[1]]
 
 # or if i have just an object 
 
-plot(bei.extra[[1]]) # [[]] more powerful beacause i dont'have to remember the name of the element i need
+plot(bei.extra[[1]]) # [[]] more powerful because i dont'have to remember the name of the element i need
 plot(elevation2)
 
 
