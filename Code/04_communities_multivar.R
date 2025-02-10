@@ -34,9 +34,9 @@ dca1 = 3.7004
 # the aim is to see the percentage of the original range which is incorporated in 2 axes. 
 # the maximum amount of axis we can use is 3 because our brains work in 3 dimensions.
 
-# 4 axis of lenghts (amount of range represented by the first axis) ???
-# calculate the percentage of each axies compared to the all dataset
-# what the % of the original is represented by the component 1
+# 4 axes of lenghts x (amount of range represented by the first axis)
+# calculate the percentage of each axis compared to the all dataset
+# what's the % of the original is represented by the component 1?
 
 dca1 = 3.7004
 dca2 = 3.1166
@@ -64,10 +64,11 @@ perc4 = prop4*100
 # Whole amouont of variability in %
 perc1 + perc2
 
-# instead of using ex 20 plots i compact dataset to final set of two axis by losing 29% of the original information but it worth it 
+# instead of using 20 diffrent plots i compact dataset to a final set of two axes 
+# loss is 29% of the original information but it does worth it 
 
-# the first two axis explain 71% of the variability 
+# the first two axes explain 71% of the variability 
 
 plot(multivar)
 
-# now i can see which species are mopre correlated 
+# now i can see which species are more correlated 
