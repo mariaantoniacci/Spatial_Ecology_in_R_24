@@ -50,15 +50,16 @@ plot(b8, col=cl)
 # since b8 is NIR it's strictly related to vegetation. Why?
 
 # par() function to make a Multiframe of images not talking to each other
+# first 3: mostly similar while Plotb8 adds additional info
 par(mfrow=c(2,2))
 plot(b2, col=cl)
 plot(b3, col=cl)
 plot(b4, col=cl)
 plot(b8, col=cl)
 
-# FIRST 3: mostly similar while Plotb8 adds additional info
 # stack them in a single image, layers overlapped in the same image made of 4 layers with data inside
 # when i plot sentstack each of the 4 images appears 
+# now it's easier to manipulate it as a single object containing all info
 sentstack<- c(b2, b3, b4, b8)
 plot(sentstack, col=cl)
 
