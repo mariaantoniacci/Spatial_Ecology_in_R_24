@@ -11,7 +11,6 @@ EN01 <- im.import("EN_01.png")
 
 # it shows the amount of nitrogen in Europe, before the COVID lockdown, mainly related to Traffic pollution
 
-
 EN13 <- im.import("EN_13.png")
 
 # due to the stop of human activity lower nitrogen level 
@@ -31,7 +30,6 @@ gr <- im.import("greenland")
 # to plot a single level, for example from 2005 which is the 2nd element in gr
 
 plot(gr[[2]])
-
 
 # multiframe: plot 1st and last elements of gr
 par(mfrow=c(1,2))
