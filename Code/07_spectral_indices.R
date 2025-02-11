@@ -22,7 +22,8 @@ m2006
 
 im.plotRGB(m2006, r=1, g=2, b=3)
 
-# we can plot single band: 2 and 3 don't make much difference. To test:
+# we can plot single bands
+# 2 and 3 don't make much difference. To test:
 plot(m2006[[2]])
 plot(m2006[[3]])
 
