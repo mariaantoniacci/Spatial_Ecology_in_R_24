@@ -75,18 +75,23 @@ tabout <- data.frame(class, y1992, y2006)
 tabout
 
 # library (ggplot2) is needed for the final graph
-
 library(ggplot2)
-ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white")
 
-# aes()= aesthetic to get histogram-like graphs
-# ggplot() works as par() 
+# first argument of the function is the data frame we want to plot
+# aestetics (aes) = what is axis x (class), what is y (y1992) and colour 
+# then we state which type of graph we want using + and geom_bar() function
+# inside geom_bar, stat="identity" means it takes the exact value
+# while fill="" to fill it with a specified colour 
+
+#1992
+ggplot (tabout, aes(x=class, y=p1992, color=class))+ geom_bar(stat="identity", fill="white")
+#2006
+ggplot (tabout, aes(x=class, y=p2006, color=class))+ geom_bar(stat="identity", fill="white")
+
 # it's a quantitative graph!
 
-ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")
-
-# to glue together the graphs in a single graph
-# we need to
+# to glue graphs together in a single one
+# we need "patchwork" package 
 install.packages("patchwork")
 library(patchwork)
 
