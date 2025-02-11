@@ -57,8 +57,15 @@ im.plotRGB(m2006, r=2, g=1, b=3)
 im.plotRGB(m1992, r=3, g=2, b=1)
 im.plotRGB(m2006, r=3, g=2, b=1)
 
+# DVI (Different Vegetation Index) 
+# to get a qualitative measure of vegetation loss
+
 # Difference vegetation iNdex in 1992
 # we stated that 1st element is NiR and 2nd element is red 
+# for each pixel from NIR band the same pixel from red band is subtracted 
+# since the image is 8 bit, DVI can vary from 255 to -255 
+# if NIR is max and red is 0 = 255
+# if red is max and nir is 0 = -255
 dvi1992= m1992[[1]] - m1992[[2]]
 
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
