@@ -27,7 +27,7 @@ im.plotRGB(m2006, r=1, g=2, b=3)
 plot(m2006[[2]])
 plot(m2006[[3]])
 
-# bare soil if NIR on top on the blue band becomes yellowish
+# NIR on the blue band: bare soil becomes yellowish
 im.plotRGB(m2006, r=3, g=2, b=1)
 
 # bare soil is pink if on top of green band
