@@ -24,4 +24,4 @@ plot(Patagonian_Shelf_Waters_Abloom)
 
 # for Windows users: 
 # working directory works with / not \
-# you should add manually the extension of the image (ex. .jpg)
+# you should add manually the extension of the image (eg: .jpg)
