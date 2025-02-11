@@ -93,10 +93,10 @@ plot(b8, col=clb)
 # we assign to each band a layer of the stack RGB
 
 # RGB plotting with a function im.plotRGB to get a natural colour image
-# sentsatck [[1]] blue
-# sentsatck [[2]] green
-# sentsatck [[3]] red
-# sentsatck [[4]] NIR
+# stacksent[[1]]= b2= blue
+# stacksent[[2]]= b3= green
+# stacksent[[3]]= b4= red
+# stacksent[[4]]= b8= NIR
 
 im.plotRGB(sentstack, r=3, g=2, b=1) 
 
