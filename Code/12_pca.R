@@ -18,7 +18,7 @@ sentpc <- im.pca(sent)
 # sentpc has 3 principal component (one equals 0) 
 # we want pc1 beacause of its higher variability or st. dev. (77)
 
-# we also see on the below matrix correlations between original bands (sentinel 1,2,3,4)
+# we also see on the matrix below correlations between original bands (sentinel 1,2,3,4)
 # and the extracted components 
 
 pc1 <- sentpc[[1]]
