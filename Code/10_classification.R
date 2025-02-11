@@ -84,9 +84,9 @@ library(ggplot2)
 # while fill="" to fill it with a specified colour 
 
 #1992
-ggplot (tabout, aes(x=class, y=p1992, color=class))+ geom_bar(stat="identity", fill="white")
+ggplot (tabout, aes(x=class, y=y1992, color=class))+ geom_bar(stat="identity", fill="white")
 #2006
-ggplot (tabout, aes(x=class, y=p2006, color=class))+ geom_bar(stat="identity", fill="white")
+ggplot (tabout, aes(x=class, y=y2006, color=class))+ geom_bar(stat="identity", fill="white")
 
 # it's a quantitative graph!
 
