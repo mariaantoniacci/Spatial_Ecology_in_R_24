@@ -87,31 +87,35 @@ plot(b4, col=clb)
 clb<- colorRampPalette(c("brown", "orange", "yellow")) (100)
 plot(b8, col=clb)
 
-
-# b8 has the higher discriminated resolution, many use this band
-# band and combine the colours together in RGB: red green and blue used by devices to get other colours
-# we assign to each band a layer of the stack RGB
-
-# RGB plotting with a function im.plotRGB to get a natural colour image
+# remeber: 
 # stacksent[[1]]= b2= blue
 # stacksent[[2]]= b3= green
 # stacksent[[3]]= b4= red
 # stacksent[[4]]= b8= NIR
+# b8 has the higher discriminated resolution, many use this band
+
+# RGB plotting
+# combine the colours together in RGB: red green and blue are filters used by devices to get new colours
+# we assign to each band a layer or filter of the RGB
+# use the function from imageRy im.plotRGB()
+# inside () specify object and bands associated 
+# in our case it's sentstack, then specify the filter to apply to each band
 
 im.plotRGB(sentstack, r=3, g=2, b=1) 
 
 # RGB has 3 component but we have 4 bands
-# facciamo scorrere i numeri we get false colours image so to add additional information that our eyes cannot perceive
+# by switching numbers we get an image in false colours so to add additional information that our eyes cannot perceive
 im.plotRGB(sentstack, r=4, g=3, b=2) 
 
-# why do that? vegetation is now represented by infrared because vegetation reflects a lot in NIR
-# it's common to put NIR on top of red band of RGB
-
+# why putting NIR on red?
+# everything that reflects NIR is visualized as red 
+# vegetation reflects a lot in NIR
+# that's why it's common to put NIR on top of red band of RGB
 
 # let's try to put NIR on top of green band obtaining another false colour image
 im.plotRGB(sentstack, r=3, g=4, b=2)
 
-# NIR on top of blue band
+# or NIR on top of blue band
 im.plotRGB(sentstack, r=3, g=2, b=4)
 
 
