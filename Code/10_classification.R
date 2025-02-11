@@ -1,13 +1,15 @@
 # Classification in R using imageRy
 
-# correlation between a pixel ands its reflectance  in different bands in a graph x,y
+# correlation between a pixel and its reflectance in different bands in a graph x,y
 # example: 3 pixels are stricly related to each other beacause of their similar reflectance 
-# additionally, the distance between the 3 pixels belonging to the same class is shorten than the distance from another band 
+# additionally, the distance between 3 pixels belonging to the same class is shorter than the distance from another band 
 
 # this is called classification of landcover classes
 
-# once the classification is done, calculate how many pixels are in the classes (which are objects where the pixels are taken from) 
-# example mato grosso images: how many pixels there were representing forest in 1992? how many in 2006?
+# once the classification is done
+# calculate how many pixels belong to those classes (which are objects where the pixels are taken from) 
+# example "mato grosso" images: how many pixels representing forest cover in 1992? 
+# how many in 2006?
 
 # libraries we need:
 
@@ -32,27 +34,24 @@ im.classify(sun, num_clusters=3)
 m1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
 m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
 
-m1992c <- im.classify(m1992,num_clusters=2) 
-
 # 2 clusters represent forest and not forest
+m1992c <- im.classify(m1992,num_clusters=2) 
 
 # in my case for 1992:
 # class 1 = human releted areas + water 
 # class 2 = forest
 
- m2006c <- im.classify(m2006,num_clusters=2) 
+m2006c <- im.classify(m2006,num_clusters=2) 
 
 # in my case for 2006:
 # class 1 = forest
 # class 2 = human related areas + water 
 
-# now calculate the frequency (or amount) of pixels cointained inside the classes
-
+# now calculate the frequency (or amount) of pixels contained inside the classes
 f1992 <- freq(m1992c)
 
-# since it's better to think in % rather than frequencies, calculate %:
-
-# total o pixels in m1992c
+# since it's better to think in % rather than frequencies, let's calculate %
+# total of pixels in m1992c
 tot1992 <- ncell(m1992c)
 
 p1992 = f1992*100/tot1992
@@ -69,9 +68,7 @@ p2006 = f2006*100/tot2006
 # class 1= forest = 45%
 # class 2 = human related areas + water = 55%
 
-
 # build a dataframe with 3 columns to be clumped together
-
 class <- c("Forest", "Human related areas")
 y1992 <- c(83, 17)
 y2006 <- c(45, 55)
@@ -99,7 +96,6 @@ library(patchwork)
 p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white")
 p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")
 p1 + p2
-
 
 # there's a graphical error to change values in the y axis
 # so we add another element to the array to limit y values in the range 0 to 100 
