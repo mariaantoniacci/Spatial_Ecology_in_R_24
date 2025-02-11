@@ -1,10 +1,16 @@
 # Code for managing and visualizing remote sensing data
 
+# we need devtools to import packages from Github
 install.packages("devtools")
 library(devtools)
 
+# install_github("") is the function of devotools 
+# user/package's name
 install_github("ducciorocchini/imageRy")
 library(imageRy)
+
+# Alternative: to let other know where is the package from
+devtools:: install_github("ducciorocchini/imageRy") 
 
 install.packages("ggplot2")
 library(ggplot2)
@@ -13,18 +19,19 @@ library(ggplot2)
 im.list()
 
 # sentinel.dolomites.b2.tif data coming out of esa copernicus and Sentinel-2 is the name of the satellite
-# b2 stands fro blue so working in 490nm, very short wavelenght, all objec treflecting blue is visible
-# every function begins with im. for the package
-# importing the data altought they are in R
+# b2 stands for blue 
+# so working in 490nm, very short wavelenght, all objects reflecting blue are visible
+# every function begins with prefix im. for the package
+# import the data altought they are in R
 b2 <-im.import("sentinel.dolomites.b2.tif" )
 
 # use another colRampPalette
 cl<- colorRampPalette(c("black", "grey", "lightgrey")) (100)
 plot(b2,col=cl)
 
-# refelctance 0<x<1 but here it's rescaled.
+# refelctance 0<x<1 but here it's rescaled
 
-#b3 is bend for 560nm so import the image
+# b3 is band for 560nm so import the image
 
 # Exercise: import b3 green and plot with the previous palette
 b3<- im.import("sentinel.dolomites.b3.tif")
@@ -35,32 +42,34 @@ plot(b3, col=cl)
 b4<- im.import("sentinel.dolomites.b4.tif") 
 plot(b4, col=cl)
 
-# b8 is near infrared (VNIR) is 840nm, not using b5,b6,b7 for the different resolution of 20 m instead of 10m
+# b8 is near infrared (VNIR) is 840nm
+# we dont't use b5,b6,b7 for the different resolution of 20 m instead of 10m
 # import NIR band
 b8<- im.import("sentinel.dolomites.b8.tif") 
 plot(b8, col=cl)
-# b8 since it's NIR is strictly related to vegetation. Why?
+# since b8 is NIR it's strictly related to vegetation. Why?
 
-# per.function to make a Multiframe of images not talking to each other
+# par() function to make a Multiframe of images not talking to each other
 par(mfrow=c(2,2))
 plot(b2, col=cl)
 plot(b3, col=cl)
 plot(b4, col=cl)
 plot(b8, col=cl)
 
-# FIRST 3: mostly similar while Plot8 adds additional info
-# stack them in a single image, layers overlapped in the same image made of 4 layers with data inside bu when i plot it each of the 4 images apper 
+# FIRST 3: mostly similar while Plotb8 adds additional info
+# stack them in a single image, layers overlapped in the same image made of 4 layers with data inside
+# when i plot sentstack each of the 4 images appears 
 sentstack<- c(b2, b3, b4, b8)
 plot(sentstack, col=cl)
 
-# i want to plot only one layer of the data 
-dev.off
+# i want to plot only one layer of the data with [[]]
+dev.off()
 plot(sentstack[[1]], col=cl) 
 # or 
 plot(sentstack[[4]], col=cl)
 
-# multifrae with different col palette
-# note taht if you plot only a band as b2, range blue-yellow readable for daltonics as well
+# multiframe with different colour palette
+# note: if i plot only a band, as b2, range blue-yellow can be read by daltonics as well
 par(mfrow=c(2,2))
 
 clb<- colorRampPalette(c("dark blue", "blue", "light blue")) (100)
@@ -78,7 +87,7 @@ plot(b8, col=clb)
 
 
 # b8 has the higher discriminated resolution, many use this band
-# bend and combine the colours together in RGB: red green and blue used by devices to get other colours
+# band and combine the colours together in RGB: red green and blue used by devices to get other colours
 # we assign to each band a layer of the stack RGB
 
 # RGB plotting with a function im.plotRGB to get a natural colour image
