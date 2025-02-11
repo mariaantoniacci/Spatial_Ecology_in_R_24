@@ -101,6 +101,7 @@ plot(b8, col=clb)
 # inside () specify object and bands associated 
 # in our case it's sentstack, then specify the filter to apply to each band
 
+# get an image in real colours
 im.plotRGB(sentstack, r=3, g=2, b=1) 
 
 # RGB has 3 component but we have 4 bands
