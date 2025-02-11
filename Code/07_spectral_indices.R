@@ -83,8 +83,10 @@ plot(dvi2006, col=cl)
 # Multiframe 
 par(mfrow=c(1,2)
 
-# NDVI = normalize different vegetation index = same of DVI (NIR - RED) but also in denominator puts NIR+red. 
-# with NDVI you can compare every image from different ranges, it's always better to use NDVI instead on DVI, but if you have images from the same range you can use DVI
+# NDVI (Normalize Different Vegetation Index)
+# same of DVI (NIR - RED) but divided by NIR+red as a denominator 
+# with NDVI you can compare every image from different ranges
+# it's always better to use NDVI instead on DVI, but if you have images of same bit you can use DVI
 # calcualte NDVI 1992 and 2006
 ndvi1992 = dvi1992 / (m1992[[1]]+m1992[[2]])
 ndvi2006 = dvi2006 / (m2006[[1]]+m2006[[2]])
