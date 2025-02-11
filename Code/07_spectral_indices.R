@@ -33,7 +33,7 @@ im.plotRGB(m2006, r=3, g=2, b=1)
 # NIR on green band: bare soil is pink 
 im.plotRGB(m2006, r=3, g=1, b=2)
 
-# import image from 1992 to see state of art before human intervention
+# import image from 1992 to see state of vegetation before human intervention
 m1992<- im.import("matogrosso_l5_1992219_lrg.jpg") 
 im.plotRGB(m1992, r=1, g=2, b=3)
 
