@@ -49,11 +49,9 @@ m2006c <- im.classify(m2006,num_clusters=2)
 
 # now calculate the frequency (or amount) of pixels contained inside the classes
 f1992 <- freq(m1992c)
-
 # since it's better to think in % rather than frequencies, let's calculate %
 # total of pixels in m1992c
 tot1992 <- ncell(m1992c)
-
 p1992 = f1992*100/tot1992
 
 # class 1 = human related areas + water = 17% cover
