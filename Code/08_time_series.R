@@ -20,7 +20,9 @@ EN13 <- im.import("EN_13.png")
 # let's take the first element of the dataset both for EN01 and EN13 and see the difference between January and March
 difEN=EN01[[1]] - EN13[[1]]
 
-# Importing all data all together changing dataset: Ice melt in Greenland 
+# Importing all data all together changing dataset: Ice melting in Greenland 
+# let's use a proxy for ice melting, non directly ice
+# but its related parameter: soil temperature 
 
 # "greenland" is part of the name of many files
 gr <- im.import("greenland")
@@ -36,7 +38,7 @@ par(mfrow=c(1,2))
 plot(gr[[1]])
 plot(gr[[4]])
 
-# in 2015 very low twmperatures only in the internal area, more ice melting 
+# in 2015 very low temperatures only in the internal area, more ice melting 
 
 difgr= gr[[1]]-gr[[4]]
 plot(difgr)
