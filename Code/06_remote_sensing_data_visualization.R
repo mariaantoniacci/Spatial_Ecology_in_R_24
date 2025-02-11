@@ -60,6 +60,7 @@ plot(b8, col=cl)
 # stack them in a single image, layers overlapped in the same image made of 4 layers with data inside
 # when i plot sentstack each of the 4 images appears 
 # now it's easier to manipulate it as a single object containing all info
+# faster than par() to obtain multifrmae 2x2
 sentstack<- c(b2, b3, b4, b8)
 plot(sentstack, col=cl)
 
