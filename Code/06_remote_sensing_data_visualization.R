@@ -64,7 +64,7 @@ plot(b8, col=cl)
 sentstack<- c(b2, b3, b4, b8)
 plot(sentstack, col=cl)
 
-# i want to plot only one layer of the data with [[]]
+# i want to plot only one layer of the data with [[]] because it's a 2D image
 dev.off()
 plot(sentstack[[1]], col=cl) 
 # or 
