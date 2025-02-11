@@ -119,7 +119,12 @@ im.plotRGB(sentstack, r=3, g=4, b=2)
 # or NIR on top of blue band
 im.plotRGB(sentstack, r=3, g=2, b=4)
 
-
+# Additional:
+# correlations of information
+pairs(stacksent)
+# it's easier to see why IR is not correlated to other bands
+# while b2, b3, b4 bands are well correlated to each other
+# it means that NIR adds more information 
 
 
 
