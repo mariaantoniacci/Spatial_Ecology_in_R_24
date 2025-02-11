@@ -85,7 +85,7 @@ par(mfrow=c(1,2)
 
 # NDVI (Normalize Different Vegetation Index)
 # same of DVI (NIR - RED) but divided by NIR+red as a denominator 
-# with NDVI you can compare every image from different ranges
+# with NDVI you can compare every image from different ranges (areas, times, bits)
 # it's always better to use NDVI instead on DVI, but if you have images of same bit you can use DVI
 # calcualte NDVI 1992 and 2006
 ndvi1992 = dvi1992 / (m1992[[1]]+m1992[[2]])
