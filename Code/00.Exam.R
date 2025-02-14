@@ -56,5 +56,17 @@ par(mfrow=c(1,2))
 plot(ndvi2016, col=cl)
 plot(ndvi2023, col=cl)
 
-# CLASSIFICATION ON NDVI
+# FIRST TRY: MASKING THE CLOUD WITH NDSI
+# we need SWIR band for this
+# on copernicus SWIR is band b12, b8a, b4
+b42016<-rast("2016_b4.tiff")
+b122016<- rast("2016_b12.tiff")
+b8a2016<- rast("2016_b8a.tiff")
+stackswir<- c( b122016,b8a2016,b42016)
+# to have all bands in a single image 
+im.plotRGB(stackswir, 1,2,3)
 
+# now try to calculate NDSI
+# NDSI <- (band_green - band_SWIR) / (band_green + band_SWIR)
+b32016<-rast("2016_B3.tiff")
+NDSI2016<- (b32016-stackswir)/(b32016+stackswir)
