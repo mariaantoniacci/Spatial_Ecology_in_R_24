@@ -38,3 +38,16 @@ im.plotRGB(y2016FC, 3,2,1)
 im.plotRGB(y2016FC, 2,3,1)
 im.plotRGB(y2023FC, 2,3,1)
 
+# CALCOLO DVI 2016
+dvi2016= y2016FC[[1]] - y2016FC[[2]]
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
+plot(dvi2016, col=cl)
+
+# CALCOLO DVI 2023
+dvi2023= y2023FC[[1]] - y2023FC[[2]]
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
+plot(dvi2023, col=cl)
+
+# CALCOLO NDVI 2016
+
+
