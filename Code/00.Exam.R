@@ -38,16 +38,23 @@ im.plotRGB(y2016FC, 3,2,1)
 im.plotRGB(y2016FC, 2,3,1)
 im.plotRGB(y2023FC, 2,3,1)
 
-# CALCOLO DVI 2016
+# DVI 2016
 dvi2016= y2016FC[[1]] - y2016FC[[2]]
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dvi2016, col=cl)
 
-# CALCOLO DVI 2023
+# DVI 2023
 dvi2023= y2023FC[[1]] - y2023FC[[2]]
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dvi2023, col=cl)
 
-# CALCOLO NDVI 2016
+# NDVI 2016 E 2023
+ndvi2016 = dvi2016 / (y2016FC[[1]]+y2016FC[[2]])
+ndvi2023 = dvi2023 / (y2023FC[[1]]+y2023FC[[2]])
 
+par(mfrow=c(1,2))
+plot(ndvi2016, col=cl)
+plot(ndvi2023, col=cl)
+
+# CLASSIFICATION ON NDVI
 
