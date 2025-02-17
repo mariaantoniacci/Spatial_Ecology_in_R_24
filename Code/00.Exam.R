@@ -70,3 +70,27 @@ im.plotRGB(stackswir, 1,2,3)
 # NDSI <- (band_green - band_SWIR) / (band_green + band_SWIR)
 b32016<-rast("2016_B3.tiff")
 NDSI2016<- (b32016-stackswir)/(b32016+stackswir)
+
+# error
+
+# Controlla l'estensione e la risoluzione
+ext(b32016)
+# SpatExtent : -63.3248519897461, -63.138427734375, 3.57767084568741, 3.69673517133588 (xmin, xmax, ymin, ymax)
+ext(b112016)
+# SpatExtent : -63.3181228616741, -63.131698606303, 3.58232958498001, 3.70139329487712 (xmin, xmax, ymin, ymax)
+res(b32016)
+# [1] 0.0001797727 0.0001793137
+res(b112016)
+# [1] 0.0001797727 0.0001793128
+
+ b112016_resampled <- resample(b112016, b32016)
+# Calcola l'NDSI
+NDSI <- (b32016 - b112016_resampled) / (b32016 + b112016_resampled)
+# Visualizza il risultato
+plot(NDSI)
+nuvole_mask <- NDSI > 0.4
+raster_senza_nuvole <- mask(b32016, nuvole_mask) # ottengo un'immagine in cui è evidente la nuvola
+
+#se plotto
+nuvole<- NDSI> 0.4
+plot(nuvole) # ottengo una immagine di True e False 
