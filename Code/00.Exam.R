@@ -195,13 +195,13 @@ SpatExtent : 399960, 509760, 390240, 500040 (xmin, xmax, ymin, ymax)
 
 
 # ALTRA MODALITà
-# UTILIZZO RIQUADRO SU COPERNICUS E SCARICO BANDE SINGOLE 
+# UTILIZZO RIQUADRO di selezione area SU COPERNICUS E SCARICO BANDE SINGOLE 
 b4_1<- rast("b4_test.tiff")
 b3_1<- rast("b3_test.tiff")
 b2_1<- rast("b2_test.tiff")
 stack2<- c(b4_1,b3_1, b2_1)
 TC_test<-im.plotRGB(stack2, 1,2,3)
-# WORKS
+# funziona
 
 # PROVO AD APPLICARCI LA MASK
 # per farlo devo prima verificare ext di stack2
@@ -224,5 +224,7 @@ ext(stack2_utm)
 # creo vettore con queste estensioni per utilizzarlo nel crop
 n_e <- ext(465476.148256286, 485491.422659762, 390968.519132133, 410983.793535609)
 cloudmask<- crop(cldmsk,n_e)
+
+# non funziona, mi arrendo 
 
 
