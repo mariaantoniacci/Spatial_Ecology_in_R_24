@@ -228,3 +228,64 @@ cloudmask<- crop(cldmsk,n_e)
 # non funziona, mi arrendo 
 
 
+
+# TENTATIVO CON RISOLUZIONE A 10m
+setwd("C:/SPATIAL ECOLOGY IN R")
+library(terra)
+b2_16<- rast("T20NMK_20161130T143752_B02_10m.jp2") # blue
+b3_16<- rast("T20NMK_20161130T143752_B03_10m.jp2") # green 
+b4_16<- rast("T20NMK_20161130T143752_B04_10m.jp2") # red
+stack<- c(b4_16, b3_16, b2_16)
+library(imageRy)
+im.plotRGB(stack,1,2,3)
+ext(stack)
+#IMPOSTO L'ESTENSIONE CHE MI SERVE
+e<- ext(465481,485498.4,390979.4,410996.8)
+im.plotRGB(stack_crop,1,2,3)
+cldmsk<- rast("MSK_CLDPRB_20m.jp2")
+
+# UTILIZZARE FUNZIONE DISAGGREGATE perchè la mask è risoluzione 20m ma le bande a 10m
+# Aumenta la risoluzione del raster da 20m a 10m
+# In questo caso, vogliamo duplicare la risoluzione, quindi dobbiamo impostare il fattore di disaggregazione a 2
+# fact = 2: Poiché la risoluzione di partenza è 20m e desideri una risoluzione di 10m, il fattore di disaggregazione deve essere 2 (perché 20m / 10m = 2). Questo significa che ogni pixel originale verrà suddiviso in un 2x2 quadrato di nuovi pixel, con la risoluzione dimezzata.
+# Interpolazione: Quando aumenti la risoluzione con disagg(), R genera nuovi valori per i pixel creati (questo dipende dal tipo di interpolazione applicata). Per impostazione predefinita, disagg() usa l'interpolazione bilineare, che può essere modificata se necessario.
+cldmsk_10m <- disagg(cldmsk, fact = 2)
+                                          
+plot(cldmsk_10m)
+cldmsk_10m_crop<- crop(cldmsk_10m,e)
+plot(cldmsk_10m_crop)
+# verifico che l'ext sia lo stesso per applicare maschera
+ext(cldmsk_10m_crop)
+# SpatExtent : 465480, 485500, 390980, 411000 (xmin, xmax, ymin, ymax)
+ext(stack_crop)
+# SpatExtent : 465480, 485500, 390980, 411000 (xmin, xmax, ymin, ymax)
+# 100= nuvole piene 
+stack_crop_msk<- mask(stack_crop, cldmsk_10m_crop, maskvalues = 100)
+# plotto
+plot(stack_crop_msk)
+im.plotRGB(stack_crop_msk,1,2,3)
+stack_crop<- crop(stack,e)
+
+# voglio l'immagine in FC
+# importo banda8
+b8_16<- rast("T20NMK_20161130T143752_B08_10m.jp2") # nir
+stackFC<- c(b8_16, b4_16, b3_16)
+im.plotRGB(stackFC,1,2,3)
+# taglio immagine
+e<- ext(465481,485498.4,390979.4,410996.8)
+stackFC_crop<- crop(stackFC,e)
+
+# 1= NIR
+# 2= red
+# 3= green
+im.plotRGB(stackFC_crop,1,2,3)
+
+# NIR on blue
+im.plotRGB(stackFC_crop,3,2,1)
+
+# calcolo DVI
+dvi2016= stackFC_crop[[1]] - stackFC_crop[[2]]
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
+plot(dvi2016, col=cl)
+
+# calcolo NDVI
