@@ -274,18 +274,25 @@ im.plotRGB(stackFC,1,2,3)
 # taglio immagine
 e<- ext(465481,485498.4,390979.4,410996.8)
 stackFC_crop<- crop(stackFC,e)
+stackFC_crop_msk<- mask(stackFC_crop, cldmsk_10m_crop, maskvalues = 100)
 
 # 1= NIR
 # 2= red
 # 3= green
-im.plotRGB(stackFC_crop,1,2,3)
+im.plotRGB(stackFC_crop_msk,1,2,3)
 
 # NIR on blue
-im.plotRGB(stackFC_crop,3,2,1)
+im.plotRGB(stackFC_crop_msk,3,2,1)
 
 # calcolo DVI
-dvi2016= stackFC_crop[[1]] - stackFC_crop[[2]]
+dvi2016= stackFC_crop_msk[[1]] - stackFC_crop_msk[[2]]
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dvi2016, col=cl)
 
 # calcolo NDVI
+ndvi2016 = dvi2016 / (stackFC_crop_msk[[1]]+stackFC_crop_msk[[2]])
+plot(ndvi2016)
+
+# classifico 
+# 3 classi per foresta, miniere, acqua
+im.classify(ndvi2016, num_clusters=3)
