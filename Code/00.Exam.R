@@ -1,3 +1,4 @@
+
 ## GOLD MINING IN YANOMAMI REGION##
 
 library(terra)
@@ -174,6 +175,9 @@ stack16_cldmsk<- mask(test2, cldmsk_cropped, maskvalues = 100)
 # ottengo la foto in TC con la maschera sopra dove i pixel delle nuvole=NA
 
 # Voglio l'immagine in FALSE color 
+# nel file scaricato NON c'è la banda NIR 
+# pROVO CON LA BANDA 8A MA NON è LA STESSA COSA
+
 # importo la banda 8A del NIR
 > b8_2016<- rast("T20NMK_20161130T143752_B8A_20m.jp2")
 # check dell'extent della banda 8A
@@ -188,4 +192,37 @@ SpatExtent : 399960, 509760, 390240, 500040 (xmin, xmax, ymin, ymax)
 > nir<- crop(b8_2016, e)
 # check per vedere se ha funzionato
 > plot(Nir_crop)
+
+
+# ALTRA MODALITà
+# UTILIZZO RIQUADRO SU COPERNICUS E SCARICO BANDE SINGOLE 
+b4_1<- rast("b4_test.tiff")
+b3_1<- rast("b3_test.tiff")
+b2_1<- rast("b2_test.tiff")
+stack2<- c(b4_1,b3_1, b2_1)
+TC_test<-im.plotRGB(stack2, 1,2,3)
+# WORKS
+
+# PROVO AD APPLICARCI LA MASK
+# per farlo devo prima verificare ext di stack2
+ext(stack2)
+# SpatExtent : -63.310844, -63.130051, 3.537684, 3.718192 (xmin, xmax, ymin, ymax)
+e_wgs84 <- ext(-63.310844, -63.130051, 3.537684, 3.718192)
+# passaggi per fare un proiezione della zona di interesse (Copernicus mi da le coordinate geografiche non in metri)
+# Definisci il CRS di origine (WGS 84)
+crs_wgs84 <- "EPSG:4326"  # Coordinate geografiche (Latitudine/Longitudine)
+# Definisci il CRS di destinazione (UTM zona 20N)
+crs_utm <- "EPSG:32620"  # UTM zona 20N
+# Crea un oggetto raster per il calcolo della trasformazione
+raster_extent1 <- rast(nrows=1, ncols=1, ext=e_wgs84, crs=crs_wgs84)
+# Converte l'extent in UTM zona 20N dell'area di interesse
+stack2_utm <- project(raster_extent1, crs_utm)
+ext(stack2_utm)
+# SpatExtent : 465476.148256286, 485491.422659762, 390968.519132133, 410983.793535609 (xmin, xmax, ymin, ymax)
+# queste le coordinate giuste in UTM 
+# che dovrà avere anche la cloud mask 
+# creo vettore con queste estensioni per utilizzarlo nel crop
+n_e <- ext(465476.148256286, 485491.422659762, 390968.519132133, 410983.793535609)
+cloudmask<- crop(cldmsk,n_e)
+
 
