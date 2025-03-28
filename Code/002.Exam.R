@@ -106,3 +106,6 @@ plot(ndvi_23, col=cl, main="2023")
 par(mfrow=c(1,2))
 im.classify(ndvi_16, num_clusters=3)
 im.classify(ndvi_23, num_clusters=3) 
+
+
+# SITE B 
