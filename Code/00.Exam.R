@@ -1,104 +1,108 @@
+# SPATIAL ECOLOGY IN R EXAM -  Student: MARIA ANTONIACCI (SGN)
 # WILDFIRES in GREECE - August 2023 
 # In August 2023, a massive wildfire broke out in the Evros region of northeastern Greece,
 # spreading rapidly from the mountainous areas to the city of Alexandroupolis.
 # Approximately 80,000 hectares of land were burned, including the forest within the Dadia–Lefkimi–Soufli Forest National Park.
 # This event is considered to be the largest wildfire ever recorded in Europe since the year 2000.
 
-# AIM 1: PRE AND POST FIRES with NBR
-# AIM 2: VEGETATION HEALTH with NDVI
+# The project has two objectives, addressed through two analyses:
+# 1: Assessing Pre and Post Wildfire Conditions using the Normalized Burn Ratio (NBR)
+# 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using the Normalized Difference Vegetation Index (NDVI)
 
+# First, set the working directory and recall libraries 
 setwd("C:/SPATIAL ECOLOGY IN R")
-library(terra)
-library(imageRy)
-library(viridis)
-library(ggplot2)
-library(patchwork)
+library(terra) # For spatial analyses
+library(imageRy) # To manipulate raster images in R
+library(viridis) # For colour palettes suitable for color blind people
+library(ggplot2) # To create graphics
+library(patchwork) # For coupling graphics
 
-### ago 1 vs ago 2 = pre and post fires 
+# 1: Assessing Pre and Post Wildfire Conditions using the Normalized Burn Ratio (NBR)  
 
-# import bands for ago 1 in TC
-b2_ago1 <- rast("b2_ago1.tiff") # blue
-b3_ago1<- rast("b3_ago1.tiff") # green 
-b4_ago1<- rast("b4_ago1.tiff") # red
+# Data are obtained from Copernicus Browser, Sentinel-2
+# Loading bands to compose an image in True Colors for Pre-wildfire
+# 8 August
+b2_ago1 <- rast("b2_ago1.tiff") # Blue
+b3_ago1<- rast("b3_ago1.tiff") # Green 
+b4_ago1<- rast("b4_ago1.tiff") # Red
 stack_ago1<- c(b4_ago1, b3_ago1, b2_ago1) # create a stack
-im.plotRGB(stack_ago1,1,2,3, title="8 August") # plot it in RGB 
 
-#import for ago 2 in TC
-b2_ago2 <- rast("b2_ago2.tiff") # blue
-b3_ago2<- rast("b3_ago2.tiff") # green 
-b4_ago2<- rast("b4_ago2.tiff") # red
+# Loading bands to compose an image in True Colors for Post-wildfire
+# 28 August
+b2_ago2 <- rast("b2_ago2.tiff") # Blue
+b3_ago2<- rast("b3_ago2.tiff") # Green 
+b4_ago2<- rast("b4_ago2.tiff") # Red
 stack_ago2<- c(b4_ago2, b3_ago2, b2_ago2) # create a stack
-im.plotRGB(stack_ago2,1,2,3, title="28 August") # plot it in RGB 
 
-# to visualize them 
+# Display the images in a layout 1-row and 2-colums using par(mfrow=) plotting in RGB
 par(mfrow= c(1,2))
 im.plotRGB(stack_ago1,1,2,3, title="8 August") # plot it in RGB 
 im.plotRGB(stack_ago2,1,2,3, title="28 August") # plot it in RGB
-
 dev.off ()
 
-# other bands needed is swir where
-# 1 = swir or b12
-# 2 = nir or b8
-# 3 = red
+# In general, to analyse images after wildfire NBR index is used
+# NBR (Normalized Burn Ratio) is a normalized index using SWIR and NIR bands
+# SWIR (Short-Wave InfraRed) shows high reflectance on burnt areas and low reflectance of healthy vegetation.
 
-# using .tiff from copernicus ago 1
-b12_ago1 <- rast("b12_ago1.tiff") # swir
-nir_ago1<- rast("nir_ago1.tiff") # nir 
+# Import bands to get images so composed:
+# First band 1 = SWIR or B12
+# Second band 2 = NIR or B8
+# Third band 3 = Red
+
+# 8 August
+b12_ago1 <- rast("b12_ago1.tiff") # SWIR
+nir_ago1<- rast("nir_ago1.tiff") # NIR
 b4_ago1<- rast("b4_ago1.tiff") # red
 stack_swir1<- c(b12_ago1, nir_ago1, b4_ago1) # create a stack
-im.plotRGB(stack_swir1,1,2,3, title="8 August") # plot it in RGB 
 
-# ago 2
-b12_ago2 <- rast("b12_ago2.tiff") # swir
-nir_ago2<- rast("nir_ago2.tiff") # nir 
+# 28 August
+b12_ago2 <- rast("b12_ago2.tiff") # SWIR
+nir_ago2<- rast("nir_ago2.tiff") # NIR 
 b4_ago2<- rast("b4_ago2.tiff") # red
 stack_swir2<- c(b12_ago2, nir_ago2, b4_ago2) # create a stack
-im.plotRGB(stack_swir2,1,2,3, title="28 August") # plot it in RGB 
 
-#together
+# Display side by side plotting in RGB
 par(mfrow=c(1,2))
-im.plotRGB(stack_swir1,1,2,3, title="8 August in SWIR") # plot it in RGB 
+im.plotRGB(stack_swir1,1,2,3, title="8 August in SWIR") 
 im.plotRGB(stack_swir2,1,2,3, title="28 August in SWIR") 
-
 dev.off ()
 
-# Ago 1 NBR
-diff_1= stack_swir1[[2]] - stack_swir1[[1]]
-sum_1= stack_swir1[[2]] + stack_swir1[[1]]
-NBR_1=(diff_1)/(sum_1)
+# 8 August
+diff_1= stack_swir1[[2]] - stack_swir1[[1]] # NIR - SWIR
+sum_1= stack_swir1[[2]] + stack_swir1[[1]] # NIR + SWIR
+NBR_1=(diff_1)/(sum_1) # Get NBR for 8 August
 
-# Ago 2
-diff_2= stack_swir2[[2]] - stack_swir2[[1]]
-sum_2= stack_swir2[[2]] + stack_swir2[[1]]
-NBR_2=(diff_2)/(sum_2)
+# 28 August
+diff_2= stack_swir2[[2]] - stack_swir2[[1]] # NIR - SWIR
+sum_2= stack_swir2[[2]] + stack_swir2[[1]] # NIR + SWIR
+NBR_2=(diff_2)/(sum_2) # Get NBR for 28 August
 
-# visualize
+# Visualize images in a stacksent array
 stackNBR <- c(NBR_1,NBR_2)
 names(stackNBR) <- c("8 August", "28 August")
 plot(stackNBR, col=viridis, axes=FALSE)
 
-# dNBR .tiff
+# Delta NBR (dNBR) is used to evaluate burn severity
 dNBR= (NBR_1) - (NBR_2)
 plot(dNBR, col=viridis, main="dNBR")
 
-# TO VISUALIZE different shades of damage 3 clusters
+# Function im.classify() is used to identify three levels of damage 
 classdnbr<- im.classify(dNBR, num_clusters= 3)
-class.names<- c("Heavily damaged area", "Moderately damaged area", "No damage") 
+class.names<- c("Heavily damaged areas", "Moderately damaged areas", "No damage") 
 plot(classdnbr, main="Wildfire Damage Classification", type="classes", levels=class.names, col=viridis, axes=FALSE)
 
-# calculate %s
-freq<- freq(classdnbr)
-tot<- ncell(classdnbr)
-prop= freq/tot
-perc=prop*100
+# To obtain values in %
+freq<- freq(classdnbr) # Frequencies
+tot<- ncell(classdnbr) # Total number of pixels
+prop= freq/tot # Proportion
+perc=prop*100 # Percentage
 perc
-# heavily = 13%
-# moderately = 12% 
-# no damage = 74.8%
-# so the 25% of the area visible in the image has been damaged by wildfires, an extensive area of the Evron region  
-# it is almost an area as New York city 
 
+# Heavily damaged areas = 13%
+# Moderately damaged areas = 12% 
+# No damage = 75%
+# So, almost 25% of the area visible in the image has been damaged by wildfires in August
+----------------------------------------------------------------------------------------
 # now use ndvi to see how the vegetation is responding to the impact in two following years
 # we expect that NDVI from June 2023 is higher than NDVI June 2024 but also than 2025. 
 
