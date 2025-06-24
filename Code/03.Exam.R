@@ -249,15 +249,53 @@ ggj23 + ggj24 + ggj25
 
 dev.off()
 
+# measuring spectral variability  during june 23,24,25
+# higher variability can be associated to habitat frammentation and heterogeneity due to the wildfire 
 
-# PCA 
+# we calculate the most informative variable that explains better the variability
+# we perform a PCA on ndvi
+# useful to map in a single map impacts and recovery post-fire
 
+# let's combine ndvis from three years in a single multibands object 
+# so each NDVI per year is compared pixel to pixel
 
+ndvi_stack <- c(ndvi1, ndvi2, ndvi3)
+names(ndvi_stack) <- c("NDVI_2023", "NDVI_2024", "NDVI_2025")
 
+# perform PCA on stack, so performing pca on each band
+ndvi_pca <- im.pca(ndvi_stack)
 
+#               PC1         PC2        
+# NDVI_2023 0.5799648  0.76215215  
+# NDVI_2024 0.6150644 -0.64122968  
+# NDVI_2025 0.5341691 -0.08915495 
 
+# where pc1 is the dominant shared trends
+# if PC1 shows light areas=> High NDVI=> healthy or recovering vegetation in all three years
+# if PC1 shows dark areas=> Low NDVI=> degradated vegetation during the years 
+# PC2 reveals significative local anomalies due to wildfire consequences in 2024 (negative values) 
 
+# visualize resulting maps
+plot(ndvi_pca, col=viridis(100), main=c("PC1", "PC2", "PC3"))
 
+# now let's analyse local SD to understand where is the higher local variation or fluctuactions in time
+# we calculate SD with moving windows method using PC1
+# MW 3x3
+pc1_sd <- focal(ndvi_pca[[1]], w = matrix(1/9, 3, 3), fun = sd)
+plot(pc1_sd, main = "Local SD of PC1", col = viridis(100))
+
+# MW 7x7 
+pc1_sd <- focal(ndvi_pca[[1]], w = matrix(1/49, 7, 7), fun = sd)
+plot(pc1_sd, main = "Local SD of PC1", col = viridis(100))
+
+# higher values=> higher local variability=> potentially at risk 
+# lower values=> stable areas0> higher potential of stable recovery 
+# MW 3x3 better resolution but less accetuated spectral varibility
+# with MW 7x7 contrasts are clearer
+
+# Conclusions:
+# significative recovery of vegetation as shown by PC1 
+# NDVI between 23 and 24 varies significantly due to fires as shown by PC2
 
 
 ### USING JPG INSTEAD OF TIFF
