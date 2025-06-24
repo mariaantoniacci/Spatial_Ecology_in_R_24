@@ -1,0 +1,152 @@
+### USING JPG INSTEAD OF TIFF
+tc_1 <- flip(rast("tc1_jpg.jpg"))
+tc_2<- flip(rast("tc2_jpg.jpg"))
+
+# to visualize in TC.jpg
+par(mfrow=c(1,2))
+plot(tc_1)
+title("8 August", line= 2, cex=2)
+plot(tc_2)
+title("28 August", line=2, cex=2)
+
+dev.off()
+# or  using.jpg
+swir1<- flip(rast("swir1_jpg.jpg"))
+swir2<- flip(rast("swir2_jpg.jpg"))
+
+# to visualise jpg
+par(mfrow=c(1,2))
+plot(swir1, main="8 August in SWIR")
+plot(swir2, main="28 August in SWIR")
+
+# Ago 1 NBR jpg
+diff_1= swir1[[2]] - swir1[[1]]
+sum_1= swir1[[2]] + swir1[[1]]
+NBR_1=(diff_1)/(sum_1)
+
+# Ago 2 NBR jpg
+diff_2= swir2[[2]] - swir2[[1]]
+sum_2= swir2[[2]] + swir2[[1]]
+NBR_2=(diff_2)/(sum_2)
+
+# visualize in jpg 
+viridis <- plasma(100)
+par(mfrow=c(1,2))
+plot(NBR_1, col=viridis)
+plot(NBR_2, col=viridis)
+
+
+
+
+# classify to see % of heallthy vegetation after the wildfire impacts
+before<- im.classify(ndvi1, num_clusters=2)
+class.names<- c("Vegetation in good state", "Non vegetated natural areas")
+plot(before, main= "June 2023", type="classes", levels=class.names, col=cl)
+
+f23<- freq(before)
+tot23<- ncell(before)
+prop23= f23/tot23
+perc23=prop23*100
+perc23
+
+# vegetated natural areas= 85% 
+# non vegetated or non natural areas= 15%
+
+# June 25
+after<- im.classify(ndvi2, num_clusters=3)
+class.names2<- c("Vegetation in good state/Natural areas", " Impacted by wildfire", "Artificial areas")
+plot(after, main= "June 2025", type="classes", levels=class.names2, col=c("yellow", "orange", "purple"))
+
+after<- im.classify(ndvi2, num_clusters=)
+class.names2<- c("Vegetation in good state/Natural areas", " Impacted by wildfire")
+plot(after, main= "June 2025", type="classes", levels=class.names2, col=c("yellow", "purple"))
+
+# 2023, 2024, 2025
+
+tcj1<- flip(rast("tc_j1_jpg.jpg"))
+tcj3<-flip(rast("tc_j3_jpg.jpg"))
+tcj2<- flip(rast("tc_j2_jpg.jpg"))
+par(mfrow=c(1,3))
+plot(tcj1, main="June 2023")
+plot(tcj3, main="June 2024")
+plot(tcj2, main="June 2025")
+
+
+ndvi1<- flip(rast("ndvi_j1_jpg.jpg"))
+ndvi3<- flip(rast("ndvi_j3_jpg.jpg"))
+ndvi2<- flip(rast("ndvi_j2_jpg.jpg"))
+par(mfrow=c(1,3))
+plot(ndvi1, main="June 2023 NDVI")
+plot(ndvi3, main="June 2024 NDVI")
+plot(ndvi2, main="June 2025 NDVI")
+
+# 2023
+before<- im.classify(ndvi1, num_clusters=3)
+class.names<- c("Vegetation in good state/Natural areas", " Moderately good", "Artificial areas")
+plot(before, main= "June 2023", type="classes", levels=class.names, col=c("yellow", "orange", "purple"))
+
+freq23<- freq(before)
+tot23<- ncell(before)
+prop23= freq23/tot23
+perc23=prop23*100
+perc23
+
+# good stated= 79%
+# moderately good= 14%
+# artficial= 7%
+
+# 2024
+a1<- im.classify(ndvi3, num_clusters=3)
+class.names1<- c("Vegetation in good state", "Impacted areas", "Artificial areas")
+plot(a1, main= "June 2024", type="classes", levels=class.names1, col=c("yellow", "orange", "purple"))
+
+freq24<- freq(a1)
+tot24<- ncell(a1)
+prop24= freq24/tot24
+perc24=prop24*100
+perc24
+
+# 27%
+# 50%
+# 23%
+
+# 2025
+a2<- im.classify(ndvi2, num_clusters=3)
+class.names2<- c("Vegetation in good state", "Impacted areas", "Artificial areas")
+plot(a2, main= "June 2025", type="classes", levels=class.names2, col=c("yellow", "orange", "purple"))
+
+legend("bottom", legend=c("Vegetation in good state", "Impacted areas", "Artificial areas"), fill=c("yellow", "orange", "purple"), 
+inset=c(0, -0.5), bty="n", horiz= TRUE)
+
+freq25<- freq(a2)
+tot25<- ncell(a2)
+prop25= freq25/tot25
+perc25=prop25*100
+perc25
+
+# 65%
+# 13%
+# 22%
+
+par(mfrow=c(1, 3), mar = c(0, 0, 4, 2), oma = c(5, 0, 2, 0))
+plot(before, main= "June 2023", type="classes", levels=class.names, col=c("yellow", "orange", "purple"), axes=FALSE, legend=FALSE)
+plot(a1, main= "June 2024", type="classes", levels=class.names1, col=c("yellow", "orange", "purple"), axes=FALSE, legend= FALSE)
+plot(a2, main= "June 2025", type="classes", levels=class.names2, col=c("yellow", "orange", "purple"), axes=FALSE, legend= FALSE)
+
+par(xpd=NA)
+
+# Aggiungi legenda centrata sotto i plot
+legend("bottom", inset=-0.4, horiz=TRUE, bty="n", cex=1,
+       legend=class.names, fill=colors)
+
+colors<- c("yellow", "orange", "purple")
+par(mfrow = c(1,3))      # reset layout
+par(xpd = TRUE)          # permette di disegnare fuori dalla finestra del plot
+legend("bottom",
+       xpd= TRUE,
+       legend = c(class.names,class.names1, class.names2),
+       fill = colors,
+       horiz = TRUE,
+       inset = c(0, -0.5),
+       bty = "n",
+       cex = 1)
