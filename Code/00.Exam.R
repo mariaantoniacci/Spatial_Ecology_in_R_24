@@ -1,4 +1,9 @@
-# GREECE WILDFIRES 2023 
+# WILDFIRES in GREECE - August 2023 
+# In August 2023, a massive wildfire broke out in the Evros region of northeastern Greece,
+# spreading rapidly from the mountainous areas to the city of Alexandroupolis.
+# Approximately 80,000 hectares of land were burned, including the forest within the Dadia–Lefkimi–Soufli Forest National Park.
+# This event is considered to be the largest wildfire ever recorded in Europe since the year 2000.
+
 # AIM 1: PRE AND POST FIRES with NBR
 # AIM 2: VEGETATION HEALTH with NDVI
 
