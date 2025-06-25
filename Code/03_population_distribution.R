@@ -1,4 +1,4 @@
-# why populations disperse over the landscape in a certain manner?
+# Why populations disperse over the landscape in a certain manner?
 
 # let's install two new packages "terra" and "sdm"
 install.packages("sdm") # species distribution models
