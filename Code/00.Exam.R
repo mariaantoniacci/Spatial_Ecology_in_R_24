@@ -221,14 +221,13 @@ perc3=prop3*100
 perc3
 
 # Dataframe with resulting percentages 
-class<- c("Healthy vegetation", "Damaged vegetation and Artificial areas") # 1st colum
+class<- c("Healthy vegetation", "Damaged vegetation and Artificial areas") # 1st column
 june23<- c(71,29) # 2nd
 june24<- c(44,55) # 3rd
 june25<- c(59,41) # 4th
 DF<- data.frame(class, june23, june24, june25)
 DF # Recall to see the dataframe 
 
-# NDVI-based analysis of vegetation trends and post-fire recovery in Evros (2023–2025)  
 # Plots are made with ggplot 
 
 ggj23<- ggplot(tabout, aes(x=class, y=june23)) +
