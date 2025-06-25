@@ -1,16 +1,15 @@
-# there are 3 concepts:
+# There are 3 concepts:
 # 1. object
 # 2. the assignemnt (<-)
 # 3. comment (like this one!)
-# 4. functions (like function 'c()' and 'plot()' containing different arguments
+# 4. functions (like function c() and plot() containing different arguments)
 # 5. arrays (set of different elements)
 
 2 + 3 # this is my first operation in R 
 
 # it's important to make use of objects
-cato <- 2 + 3 #the result of the operation is assigned to an object called 'cato'
-
-
+cato <- 2 + 3 # the result of the operation is assigned to an object called 'cato'
+ 
 maria <- 4 + 2
 maria 
 
@@ -22,20 +21,22 @@ cato ^ maria
 
 
 # arrays or vectors
-andrea <- c(10, 15, 20, 50, 70) # concatenated objects in a function 
+# concatenated objects in a function 
 # all arguments are separted by commas in a function
+andrea <- c(10, 15, 20, 50, 70) 
 andrea
 
 sofia <- c(100, 200, 300, 400, 500)
+sofia
 
 # now i want to correlate andrea and sofia, eg. reationship between amount of co2 and the fruits 
-# i use function 'plot'
+# i use function plot()
 
 plot(sofia, andrea)
 
-# i can change stuff in the plot
+# i can change stuff in the plot:
 # symbols, as black filled circles
-# pch R software: each number associated with a symbol 
+# pch in R software: each number associated with a symbol 
 # check the site https://www.datanovia.com/en/blog/pch-in-r-best-tips/
 
 plot(sofia, andrea, pch=19) # sofia here is an argument but no space between parenthesis 
