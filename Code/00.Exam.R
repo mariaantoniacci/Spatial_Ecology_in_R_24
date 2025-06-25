@@ -82,7 +82,7 @@ viridis<- viridis(100, option="plasma")
 
 # Combine images in a stacksent array
 stackNBR <- c(NBR_1,NBR_2)
-names(stackNBR) <- c("8 August", "28 August")
+names(stackNBR) <- c("8 August in NBR", "28 August in NBR")
 plot(stackNBR, col=viridis, axes=FALSE)
 
 # Delta NBR (dNBR) is used to evaluate burn severity
