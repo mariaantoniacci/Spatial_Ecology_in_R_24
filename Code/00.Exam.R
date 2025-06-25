@@ -186,9 +186,9 @@ cl.names3<- c("Healthy vegetation", "Damaged vegetation and Artificial areas")
 plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis, axes=FALSE)
 
 # Display in par(mfrow=)
+par(mfrow=c(1,3), mar=c(5,2,10,2) + c(2,5,2,0)) # Adjust margins and add space for legend and title
 cl2 <- subst(cl2, from = c(1, 2), to = c(2, 1))  # To swap classes to ensure consistent ordering: 1 = damaged, 2 = healthy
 cl3 <- subst(cl3, from = c(1, 2), to = c(2, 1))  # To swap classes to ensure consistent ordering: 1 = damaged, 2 = healthy
-par(mfrow=c(1,3), mar=c(5,2,10,2) + c(2,5,2,0)) # Adjust margins and add space for legend and title
 plot(cl1, main= "June 2023", type="classes", levels=cl.names, col=viridis(2), axes=FALSE, legend=FALSE)
 plot(cl2, main= "June 2024", type="classes", levels=cl.names2, col=viridis(2), axes=FALSE, legend=FALSE)
 legend("bottom",
