@@ -77,7 +77,7 @@ diff_2= stack_swir2[[2]] - stack_swir2[[1]] # NIR - SWIR
 sum_2= stack_swir2[[2]] + stack_swir2[[1]] # NIR + SWIR
 NBR_2=(diff_2)/(sum_2) 
 
-# Create a color palette (color blind peolple friendly) from viridis package
+# Create a color palette (color blind people friendly) from viridis package
 viridis<- viridis(100, option="plasma")
 
 # Combine images in a stacksent array
@@ -91,9 +91,9 @@ dNBR= (NBR_1) - (NBR_2) # Difference Pre - Post indicates high severity
 plot(dNBR, col=viridis, main="dNBR") # Graph highlighting burnt area 
 
 # Function im.classify() is used to identify three levels of damage 
-# dNBR CLassification 
+# CLassification based on dNBR
 classdnbr<- im.classify(dNBR, num_clusters= 3)
-class.names<- c("Heavily damaged areas", "Moderately damaged areas", "No damage") 
+class.names<- c("Severely damaged areas", "Moderately damaged areas", "No damage") 
 plot(classdnbr, main="Wildfire Damage Classification", type="classes", levels=class.names, col=viridis, axes=FALSE)
 
 # To obtain values in %
@@ -103,7 +103,7 @@ prop= freq/tot # Proportion
 perc=prop*100 # Percentage
 perc
 
-# Heavily damaged areas = 13%
+# Severely damaged areas = 13%
 # Moderately damaged areas = 12% 
 # No damage = 75%
 # So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023
