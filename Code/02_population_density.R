@@ -1,7 +1,9 @@
-# how to calculate density of individuals in the population
+# How to calculate density of individuals in the population
+
 # to import a packages install.packages is the function to use
 # let's use the function
 install.packages("spatstat") # "" protects from exit R in and out of package
+
 # to use the package library () without quotes because it's already in R now
 # recalling the package
 library(spatstat)
@@ -10,7 +12,6 @@ library(spatstat)
 bei
 
 # to get a plot a visual perception of dataset
-
 plot(bei)
 
 # let's change the graph w/ closed dots
@@ -18,7 +19,7 @@ plot(bei, pch=19) # remember to put space between argumets but avoid between bra
 
 plot(bei, pch=19, cex=.5)
 
-# we can figure out how they are dispersed but not why they are so
+# we can figure out how they are dispersed but not why they are so 
 
 # additional dataset for covariates soil types, temperature, etc. 
 bei.extra # list of pixel images raster type
@@ -45,6 +46,7 @@ plot(elevation2)
 # density is the function inside spatstat to calculate density of population
 # let's build a density map starting from points
 density(bei) 
+
 # put density in an obj
 densitymap <- density(bei)
 densitymap # so every pixel has points inside
