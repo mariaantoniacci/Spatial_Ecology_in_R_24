@@ -6,8 +6,8 @@
 # This event is considered to be the largest wildfire ever recorded in Europe since the year 2000.
 
 # The project has two objectives, addressed through two analyses:
-# 1: Assessing Pre and Post Wildfire Conditions using the Normalized Burn Ratio (NBR)
-# 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using the Normalized Difference Vegetation Index (NDVI)
+# 1: Assessing Pre and Post Wildfire Conditions using NBR
+# 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using NDVI
 
 # First, set the working directory and recall libraries 
 setwd("C:/SPATIAL ECOLOGY IN R")
