@@ -197,19 +197,22 @@ legend("bottom",
        xpd=TRUE)          # Legend outside the plot area
 plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis(2), axes=FALSE, legend=FALSE)
 
-# Pixel quantification to get % of classes
+# Pixel quantification to get % 
+
 # 2023
 f1<- freq(cl1)
 tot1<- ncell(cl1)
 prop1= f1/tot1
 perc1=prop1*100
 perc1
+
 #2024
 f2<- freq(cl2)
 tot2<- ncell(cl2)
 prop2= f2/tot2
 perc2=prop2*100
 perc2
+
 #2025
 f3<- freq(cl3)
 tot3<- ncell(cl3)
