@@ -163,10 +163,11 @@ ndvi2= dvi2/ (stack_j2fc[[1]] + stack_j2fc[[2]])
 ndvi3= dvi3/ (stack_j3fc[[1]] + stack_j3fc[[2]])
 
 # Comparison of images side by side
-par(mfrow=c(1,3), mar=c(5,2,10,2))
+par(mfrow=c(1,3), mar=c(5,2,10,2), oma=c(0,0,10,0))
 plot(ndvi1, col=viridis, main="June 2023", axes=FALSE)
 plot(ndvi2, col=viridis, main="June 2024", axes=FALSE)
 plot(ndvi3, col=viridis, main="June 2025", axes=FALSE)
+title("NDVI Comparison", outer=TRUE, cex.main=2)
 
 # Classification on NDVI 
 # June 2023
