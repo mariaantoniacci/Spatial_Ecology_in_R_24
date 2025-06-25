@@ -1,3 +1,10 @@
+cl2 <- subst(cl2, from = c(1, 2), to = c(2, 1))  # To swap classes to ensure consistent ordering: 1 = damaged, 2 = healthy
+cl3 <- subst(cl3, from = c(1, 2), to = c(2, 1))  # To swap classes to ensure consistent ordering: 1 = damaged, 2 = healthy
+
+in classification comparison 
+
+
+
 ### USING JPG INSTEAD OF TIFF
 tc_1 <- flip(rast("tc1_jpg.jpg"))
 tc_2<- flip(rast("tc2_jpg.jpg"))
