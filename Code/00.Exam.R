@@ -42,7 +42,7 @@ dev.off ()
 
 # In general, to analyse images after wildfire NBR index is used
 # NBR (Normalized Burn Ratio) is a normalized index that uses SWIR and NIR bands
-# SWIR (Short-Wave InfraRed) shows high reflectance on burnt areas and low reflectance of healthy vegetation.
+# SWIR (Short-Wave InfraRed) shows high reflectance on burned vegetation and low reflectance of healthy vegetation.
 
 # Import bands to get images so composed:
 # First band 1 = SWIR or B12
