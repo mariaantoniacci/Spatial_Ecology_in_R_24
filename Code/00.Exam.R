@@ -287,8 +287,8 @@ ndvi_pca <- im.pca(ndvi_stack)
 # If PC1 shows dark areas => Low NDVI => degradated vegetation.
 # PC2 reveals significative local anomalies due to wildfire consequences in 2024 (negative values) 
 
-# Display NDVI plot across time
-plot(ndvi_pca, col=viridis, main=c("PC1", "PC2", "PC3"))
+# Display NDVI plot across time only considering PC1 and PC2
+plot(ndvi_pca[[1:2]], col=viridis, main=c("PC1", "PC2"), axes=FALSE)
 
 # Analysis of Local Standard Deviation (SD) to identify areas with higher spatial and temporal variation
 # SD is calculated using Moving Windows method (MW) applied to PC1
