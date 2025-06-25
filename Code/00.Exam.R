@@ -269,8 +269,8 @@ dev.off()
 # PCA is based on NDVI values
 # The approach is useful for visualizing fire impact and vegetation recovery in a single map
 
-# Start by combining NDVI rasters from the three years into a multiband object 
-# This allows pixel-to-pixel comparison across time
+# Combining NDVI rasters from the three years into a multiband object 
+# Allows pixel-to-pixel comparison across time
 
 ndvi_stack <- c(ndvi1, ndvi2, ndvi3)
 names(ndvi_stack) <- c("NDVI_2023", "NDVI_2024", "NDVI_2025") # Assign layer names for clarity
