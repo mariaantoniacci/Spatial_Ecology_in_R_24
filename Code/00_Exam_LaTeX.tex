@@ -1,0 +1,319 @@
+\documentclass{beamer} % Presentation in Latex
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref} % Hypertext link 
+
+\usetheme{Frankfurt} % style 
+\usecolortheme{spruce} % color
+
+\title{Wildfires in Evros region, Greece}
+\author{Maria Antoniacci}
+\institute{Scienze e Gestione della Natura - Unibo}
+%\date{}
+
+\begin{document}
+
+\maketitle 
+
+\AtBeginSection[]
+{
+\begin{frame}{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+} % To see outline at evry new section
+
+\section{Introduction} % 1° section
+
+\begin{frame}{2023 Wildfires in Greece}
+
+\begin{columns} % To have more than one
+
+    \begin{column}{0.65\textwidth}
+    \begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{map.jpg}
+   \end{figure}
+     \begin{figure}
+     \centering
+    \includegraphics[width=0.6\linewidth]
+    {ansa.jpg}
+    
+    {\tiny{Source: Sentinel-2, processed by ESA, 2023.}}
+   \end{figure}  
+    
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \scriptsize In \textbf{August 2023},a massive \textbf{wildfire}\\ broke out in the \textbf{Evros} region of northeastern Greece,\reaching Alexandroupolis.
+        
+        \bigskip
+        Approximately \textbf{80,000 hectares}\\ of land were burned, including\\ the forest within the Dadia - Lefkimi - Soufli Forest National Park.
+        
+        \bigskip
+        This event is considered to be the\\ largest wildfire ever recorded in Europe since the year 2000. 
+       
+    \end{column}
+    
+\end{columns}
+
+\end{frame}
+
+\section{Objectives} % 2° sezione
+
+\begin{frame}{Objectives}
+    The objectives of the analysis are:
+    \bigskip
+    \begin{itemize}
+    \item    1: Assessing \textbf{Pre- and Post- Wildfire} Conditions using the Normalized Burn Ratio (\textbf{NBR} and \textbf{dNBR})
+
+ \bigskip
+    
+    \item   2: Evaluating \textbf{Vegetation Health Trends}  for the years 2023, 2024, and 2025 in June using the Normalized Difference Vegetation Index (\textbf{NDVI}) 
+    \end{itemize}
+\end{frame}
+
+\section{Materials and methods} % 3° sezione
+\begin{frame}{Data collection}
+    Sentinel-2 satellite images were taken from 
+    \textbf{\href{https://browser.dataspace.copernicus.eu}{Copernicus Browser}}:
+    \bigskip
+    \begin{itemize}
+        \item  Selecting area of interest
+        \item  Filtering with cloud coverage lower than 10\%
+        \item Downloading single bands B4, B3, B2 for True color, B8 (NIR), B12 (SWIR)
+        \item Downloading in \textit{.tiff}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Packages} % titolo in cima
+    The analyses require the following packages:
+    \bigskip % per lasciare spazio
+    \begin{itemize} % elenco puntato
+        \item terra
+        \item imageRy
+        \item viridis
+        \item ggplot2
+        \item patchwork
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Main functions}
+\bigskip
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+    \item    \texttt{library()} 
+    \item    \texttt{setwd()} 
+    \item    \texttt{rast()} 
+    \item    \texttt{im.plotRGB()}
+    \item    \texttt{plot()}
+    \item    \texttt{par()}
+    \item    \texttt{viridis()}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  
+ \begin{itemize}
+    \item    \texttt{im.classify()}
+    \item    \texttt{freq()} and \texttt{ncell()}
+    \item    \texttt{data.frame()}
+    \item    \texttt{ggplot()}
+    \item    \texttt{patchwork()}
+    \item    \texttt{im.pca()} 
+    \item    \texttt{focal()}
+    \end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Analysis - 1} 
+\begin{frame}{Before and After the Wildfire}
+\centering
+Assessing Pre- and Post- Wildfire conditions in Evros region. 
+
+\bigskip
+
+\centering True Colors
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{TC_PRE_POST.jpeg}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Spectral Indices -  SWIR}
+SWIR (Short-Wave InfraRed) shows \textbf{high reflectance on burned vegetation} and low reflectance of healthy vegetation.
+
+ \bigskip
+ 
+ \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{SWIR_PRE_POST.jpeg}
+   \end{figure}
+\end{frame}
+
+\begin{frame}{Spectral Indices - NBR}
+ To analyze images \textbf{after wildfires} NBR index is used.
+ 
+ \textbf{Normalized Burn Ratio} (NBR) is a normalized index that uses SWIR and NIR bands.
+
+ \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{NBR_PRE_POST.jpeg}
+   \end{figure}
+\end{frame}
+
+\begin{frame}{Spectral Indices - dNBR}
+\textbf{dNBR} shows the difference between NBR before and after the fire.
+
+\bigskip
+Higher positive dNBR values indicate greater \textbf{burn severity}.
+
+\begin{center}
+     \centering
+     \includegraphics[width=0.8\linewidth]{dNBR1.jpeg}
+ \end{center} 
+\end{frame}
+
+\begin{frame}{Wildfire Damage Classification}
+ \centering Identifying three levels of damage in Evros area based on dNBR:
+ 
+ \begin{columns}
+    \begin{column}[t]{0.30\textwidth}
+       \centering
+       \bigskip
+       \bigskip
+        \begin{itemize}
+         \item Severely damaged=13\%
+         \item Moderately damaged=12\%
+         \item No damage=75\%
+         \end{itemize}
+ \end{column} 
+
+\begin{column}[t]{0.80\textwidth}
+            \centering
+            \begin{figure}
+            \includegraphics[width=1\linewidth]{dNBR_CLASSIFICATION.jpeg}  
+            \end{figure}
+ \end{column} 
+ \end{columns}
+\end{frame}
+
+\section{Analysis - 2} 
+\begin{frame}{Vegetation Health Trends}
+ \bigskip
+Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 in June.
+\begin{figure}
+            \includegraphics[width=1\linewidth]{TC_23_24_25.jpeg}  
+            \end{figure}
+\end{frame}
+
+\begin{frame}{Spectral Indices - NDVI}
+\textbf{Normalized Difference Vegetation Index} (NDVI) is used to assess how vegetation responds to disturbance caused by fire over time.
+
+\centering 
+    \begin{equation*}
+        NDVI = \frac{NIR - RED}{NIR + RED}
+    \end{equation*}
+    \begin{figure}
+            \includegraphics[width=1\linewidth]{NDVI_COMP.jpeg}  
+    \end{figure}
+\end{frame}
+
+\begin{frame}{NDVI-based Classification}
+\bigskip
+NDVI-based classification helps visualize vegetation dynamics over three years by showing variations between damaged and healthy areas. 
+\begin{figure}
+        \includegraphics[width=1\linewidth]{CLASS_COMP232425.jpeg}  
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Classification based on NDVI}
+
+\begin{columns}
+
+\begin{column}{0.6\textwidth}
+
+\begin{figure}
+    \centering
+            \includegraphics[width=1\linewidth]{ClassJUNE.jpeg}  
+    \end{figure}
+    \end{column}
+
+\begin{column}{0.4\textwidth}
+Percentages of vegetation in good condition over the years: \begin{itemize}
+        \item June 2023: 71\%
+        \item June 2024: 44\%
+        \item June 2025: 59\%
+    \end{itemize}
+    \bigskip
+The data suggest that \textbf{vegetation is slowly recovering}.
+    \end{column}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Measuring spectral variability}
+\bigskip
+\centering
+\textbf{PCA} on NDVI values across years 2023-2025
+
+\begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{PC1_PC2.jpeg}
+    \end{figure}    
+\end{frame}
+
+\begin{frame}{Measuring spectral variability}
+\centering
+\textbf{Moving window} (3x3 MW and 7x7 MW) on \textbf{PC1}
+
+\bigskip
+\bigskip
+
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{figure}
+    \centering
+        \includegraphics[width=1\linewidth]{SD 3X3.jpeg}  
+\end{figure}
+\end{column}
+
+\begin{column}{0.6\textwidth}
+\begin{figure}
+    \centering
+        \includegraphics[width=1\linewidth]{SD 7X7.jpeg}  
+\end{figure}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\section{Conclusions}
+
+\begin{frame}{Considerations}
+To summarize the result of the analyses:
+\bigskip
+\begin{itemize} 
+\item Approximately 25\% of the study area in southern Evros was moderately to severely damaged by the wildfire.
+    \bigskip
+    \pause \item NBR and dNBR map burn severity effectively.
+    \bigskip
+     \pause \item NDVI shows a decline in 2024, followed by a partial recovery of vegetation in 2025.
+    \bigskip
+     \pause \item PCA highlights main vegetation dynamics and fire impact across time. 
+    \bigskip
+     \pause \item Local SD identifies areas with high variability and recovery potential.
+    \bigskip
+    \pause \item Multitemporal analysis is a key for monitoring fire effects and vegetation recovery.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The End}
+\centering
+\large {Thank you for your attention!}
+\end{frame}
+
+
+\end{document}
