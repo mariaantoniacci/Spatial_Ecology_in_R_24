@@ -17,7 +17,7 @@ library(viridis) # For colour palettes suitable for color blind people
 library(ggplot2) # To create graphics
 library(patchwork) # For coupling graphics
 
-# 1: Assessing Pre and Post Wildfire Conditions using the Normalized Burn Ratio (NBR)  
+## 1: Assessing Pre and Post Wildfire Conditions using the Normalized Burn Ratio (NBR)  
 
 # Data are obtained from Copernicus Browser, Sentinel-2
 # Loading bands to compose an image in True Colors for Pre-wildfire
@@ -77,7 +77,10 @@ diff_2= stack_swir2[[2]] - stack_swir2[[1]] # NIR - SWIR
 sum_2= stack_swir2[[2]] + stack_swir2[[1]] # NIR + SWIR
 NBR_2=(diff_2)/(sum_2) 
 
-# Visualize images in a stacksent array
+# Create a color palette (color blind peolple friendly) from viridis package
+viridis<- viridis(100, option="plasma")
+
+# Combine images in a stacksent array
 stackNBR <- c(NBR_1,NBR_2)
 names(stackNBR) <- c("8 August", "28 August")
 plot(stackNBR, col=viridis, axes=FALSE)
@@ -104,134 +107,132 @@ perc
 # Moderately damaged areas = 12% 
 # No damage = 75%
 # So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023
-----------------------------------------------------------------------------------------
-# now use ndvi to see how the vegetation is responding to the impact in two following years
-# we expect that NDVI from June 2023 is higher than NDVI June 2024 but also than 2025. 
 
-# let's visualize first june 23, june 24 and june 25
-# june 23
-b2j1<- rast("b2_j1.tiff")
-b3j1<- rast("b3_j1.tiff")
-b4j1<- rast("b4_j1.tiff")
+## 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using the Normalized Difference Vegetation Index (NDVI)
+
+# NDVI is used to assess how the vegetation is responding to the impact in two following years
+# Expectations: NDVI in June 2023 is higher than NDVI in June 2024 but also in 2025. 
+
+# June 2023 
+b2j1<- rast("b2_j1.tiff") # B
+b3j1<- rast("b3_j1.tiff") # G
+b4j1<- rast("b4_j1.tiff") # R 
 stack_j1<- c(b4j1, b3j1, b2j1) # create a stack
-im.plotRGB(stack_j1,1,2,3, title="June 2023") # plot it in RGB 
 
-# june 24
+# June 2024
 b2j2<- rast("b2_j2.tiff")
 b3j2<- rast("b3_j2.tiff")
 b4j2<- rast("b4_j2.tiff")
-stack_j2<- c(b4j2, b3j2, b2j2) # create a stack
-im.plotRGB(stack_j2,1,2,3, title="June 2024") # plot it in RGB 
+stack_j2<- c(b4j2, b3j2, b2j2) 
 
-#june 25
+# June 2025
 b2j3<- rast("b2_j3.tiff")
 b3j3<- rast("b3_j3.tiff")
 b4j3<- rast("b4_j3.tiff")
-stack_j3<- c(b4j3, b3j3, b2j3) # create a stack
-im.plotRGB(stack_j3,1,2,3, title="June 2025") # plot it in RGB 
+stack_j3<- c(b4j3, b3j3, b2j3) 
 
-# visualize together
+# Display using par(mfrow=)
 par(mfrow=c(1,3), mar=c(5,2,10,2))
 im.plotRGB(stack_j1,1,2,3, title="June 2023") # plot it in RGB 
 im.plotRGB(stack_j2,1,2,3, title="June 2024") # plot it in RGB 
 im.plotRGB(stack_j3,1,2,3, title="June 2025") # plot it in RGB 
 
-# let's import images in false colors (NIR)
-# june 23
-b8j1<- rast("b8_j1.tiff")
-stack_j1fc<- c(b8j1, b4j1, b3j1) # create a stack
+# Import NIR band to create images in False Colors
+# June 2023
+b8j1<- rast("b8_j1.tiff") # NIR band
+stack_j1fc<- c(b8j1, b4j1, b3j1) # Create a stack
 
-# june 24
+# June 2024
 b8j2<- rast("b8_j2.tiff")
-stack_j2fc<- c(b8j2, b4j2, b3j2) # create a stack
+stack_j2fc<- c(b8j2, b4j2, b3j2) 
 
-#june 25
+# June 2025
 b8j3<- rast("b8_j3.tiff")
-stack_j3fc<- c(b8j3, b4j3, b3j3) # create a stack
+stack_j3fc<- c(b8j3, b4j3, b3j3) 
 
+# Calculation of spectral indices for vegetation
+# DVI - Difference Vegetation Index (NIR - RED)
 dvi1= stack_j1fc[[1]] - stack_j1fc[[2]]
 dvi2= stack_j2fc[[1]] - stack_j2fc[[2]]
 dvi3= stack_j3fc[[1]] - stack_j3fc[[2]]
 
-# NDVI
+# NDVI = DVI / (NIR + RED)
+# NDVI is used to assess the state of vegetation 
 ndvi1= dvi1/ (stack_j1fc[[1]] + stack_j1fc[[2]])
 ndvi2= dvi2/ (stack_j2fc[[1]] + stack_j2fc[[2]])
 ndvi3= dvi3/ (stack_j3fc[[1]] + stack_j3fc[[2]])
 
+# Comparison of images side by side
 par(mfrow=c(1,3), mar=c(5,2,10,2))
-plot(ndvi1, col=viridis, main="June 2023")
-plot(ndvi2, col=viridis, main="June 2024")
-plot(ndvi3, col=viridis, main="June 2025")
+plot(ndvi1, col=viridis, main="June 2023", axes=FALSE)
+plot(ndvi2, col=viridis, main="June 2024", axes=FALSE)
+plot(ndvi3, col=viridis, main="June 2025", axes=FALSE)
 
-# classify im.classify
-#june 23
+# Classification on NDVI 
+# June 2023
 cl1<- im.classify(ndvi1, num_clusters=2)
 cl.names<- c("Healthy vegetation", "No vegetation or Artificial areas")
 plot(cl1, main= "June 2023", type="classes", levels=cl.names, col=viridis, axes=FALSE)
 
-# june 24 
+# June 2024 
 cl2<- im.classify(ndvi2, num_clusters=2)
 cl.names2<- c("Healthy vegetation", "Damaged vegetation and Artificial areas")
 plot(cl2, main= "June 2024", type="classes", levels=cl.names2, col=viridis, axes=FALSE)
 
-# june 25
+# June 2025
 cl3<- im.classify(ndvi3, num_clusters=2)
 cl.names3<- c("Healthy vegetation", "Damaged vegetation and Artificial areas")
 plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis, axes=FALSE)
 
-# visualize 
-
-cl3 <- subst(cl3, from = c(1, 2), to = c(2, 1))  # ora 1 = damaged, 2 = healthy
-par(mfrow=c(1,3), mar=c(5,2,10,2) + c(2,5,2,0))
+# Display in par(mfrow=)
+cl3 <- subst(cl3, from = c(1, 2), to = c(2, 1))  # To swap classes to ensure consistent ordering: 1 = damaged, 2 = healthy
+par(mfrow=c(1,3), mar=c(5,2,10,2) + c(2,5,2,0)) # Adjust margins and add space for legend and title
 plot(cl1, main= "June 2023", type="classes", levels=cl.names, col=viridis(2), axes=FALSE, legend=FALSE)
 plot(cl2, main= "June 2024", type="classes", levels=cl.names2, col=viridis(2), axes=FALSE, legend=FALSE)
-plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis(2), axes=FALSE, legend=FALSE)
-legend("bottomleft",
+legend("bottom",
        legend=c("Damaged vegetation and Artificial areas", "Healthy vegetation"),
-       fill= viridis(2),
-       bty="n",
-       horiz= FALSE,
-       xpd=TRUE)
+       cex= 1,
+       fill= viridis(2),  
+       bty="n",           # No box around legend
+       horiz= FALSE,      # Vertical legend
+       xpd=TRUE)          # Legend outside the plot area
+plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis(2), axes=FALSE, legend=FALSE)
 
-
-# to get the %s
-
+# Pixel quantification to get % of classes
+# 2023
 f1<- freq(cl1)
 tot1<- ncell(cl1)
 prop1= f1/tot1
 perc1=prop1*100
 perc1
-
+#2024
 f2<- freq(cl2)
 tot2<- ncell(cl2)
 prop2= f2/tot2
 perc2=prop2*100
 perc2
-
+#2025
 f3<- freq(cl3)
 tot3<- ncell(cl3)
 prop3= f3/tot3
 perc3=prop3*100
 perc3
 
-# creating a tabout
-class<- c("Healthy vegetation", "Damaged vegetation and Artificial areas")
-june23<- c(71,29)
-june24<- c(44,55)
-june25<- c(59,41)
+# Dataframe with resulting percentages 
+class<- c("Healthy vegetation", "Damaged vegetation and Artificial areas") # 1st colum
+june23<- c(71,29) # 2nd
+june24<- c(44,55) # 3rd
+june25<- c(59,41) # 4th
+DF<- data.frame(class, june23, june24, june25)
+DF # Recall to see the dataframe 
 
-tabout<- data.frame(class, june23, june24, june25)
-tabout 
-
-# visulize data graphically with GGPLOT2 and patchwork
-# to analyze the restorantion dynamics of vegetated areas comparing june 23,24,25 ndvi 
-
-# tabout con classificazioni basate su ndvi1,2,3
+# NDVI-based analysis of vegetation trends and post-fire recovery in Evros (2023–2025)  
+# Plots are made with ggplot 
 
 ggj23<- ggplot(tabout, aes(x=class, y=june23)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"= "darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick"))+  ylim (c(0,100))+
-    ggtitle("June 2023") + ylab("%") +
+    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) +
+    ylim (c(0,100)) + ggtitle("June 2023") + ylab("%") +
     theme(plot.title=element_text(face="bold", hjust= 0.5), legend.position="none",
           axis.title.x = element_blank(),
       axis.text.x  = element_blank(),
@@ -239,8 +240,8 @@ ggj23<- ggplot(tabout, aes(x=class, y=june23)) +
 
 ggj24 <- ggplot(tabout, aes(x=class, y=june24)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"= "darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick"))+  ylim (c(0,100))+
-    ggtitle("June 2024") + ylab("%") +
+    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) +
+    ylim (c(0,100)) + ggtitle("June 2024") + ylab("%") +
     theme(plot.title=element_text(face="bold", hjust= 0.5), legend.position="none",
           axis.title.x = element_blank(),
       axis.text.x  = element_blank(),
@@ -248,32 +249,32 @@ ggj24 <- ggplot(tabout, aes(x=class, y=june24)) +
 
 ggj25 <- ggplot(tabout, aes(x=class, y=june25)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"= "darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick"))+  ylim (c(0,100))+
-    ggtitle("June 2025") + ylab("%") + 
+    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) + 
+    ylim (c(0,100)) + ggtitle("June 2025") + ylab("%") + 
     theme(plot.title=element_text(face="bold", hjust= 0.5),
           axis.title.x = element_blank(),
       axis.text.x  = element_blank(),
       axis.ticks.x = element_blank())
 
-# visulize graphs together with patchwork 
+# Combine plots using patchwork 
 ggj23 + ggj24 + ggj25
 
 dev.off()
 
-# measuring spectral variability  during june 23,24,25
-# higher variability can be associated to habitat frammentation and heterogeneity due to the wildfire 
+# Measuring spectral variability from June 2023 to June 2025
+# High variability can be associated to habitat fragmentation and landscape heterogeneity caused by wildfires 
 
-# we calculate the most informative variable that explains better the variability
-# we perform a PCA on ndvi
-# useful to map in a single map impacts and recovery post-fire
+# PCA (Principal Component Analyses) to extract the most informative component explaning variability
+# PCA is based on NDVI values
+# The approach is useful for visualizing fire impact and vegetation recovery in a single map
 
-# let's combine ndvis from three years in a single multibands object 
-# so each NDVI per year is compared pixel to pixel
+# Start by combining NDVI rasters from the three years into a multiband object 
+# This allows pixel-to-pixel comparison across time
 
 ndvi_stack <- c(ndvi1, ndvi2, ndvi3)
-names(ndvi_stack) <- c("NDVI_2023", "NDVI_2024", "NDVI_2025")
+names(ndvi_stack) <- c("NDVI_2023", "NDVI_2024", "NDVI_2025") # Assign layer names for clarity
 
-# perform PCA on stack, so performing pca on each band
+# Perform PCA across NDVI layers
 ndvi_pca <- im.pca(ndvi_stack)
 
 #               PC1         PC2        
@@ -281,29 +282,34 @@ ndvi_pca <- im.pca(ndvi_stack)
 # NDVI_2024 0.6150644 -0.64122968  
 # NDVI_2025 0.5341691 -0.08915495 
 
-# where pc1 is the dominant shared trends
-# if PC1 shows light areas=> High NDVI=> healthy or recovering vegetation in all three years
-# if PC1 shows dark areas=> Low NDVI=> degradated vegetation during the years 
+# PC1 shows dominant trends across time:
+# If PC1 shows light areas => High NDVI => healthy or recovering vegetation 
+# If PC1 shows dark areas => Low NDVI => degradated vegetation.
 # PC2 reveals significative local anomalies due to wildfire consequences in 2024 (negative values) 
 
-# visualize resulting maps
-plot(ndvi_pca, col=viridis(100), main=c("PC1", "PC2", "PC3"))
+# Display NDVI plot across time
+plot(ndvi_pca, col=viridis, main=c("PC1", "PC2", "PC3"))
 
-# now let's analyse local SD to understand where is the higher local variation or fluctuactions in time
-# we calculate SD with moving windows method using PC1
+# Analysis of Local Standard Deviation (SD) to identify areas with higher spatial and temporal variation
+# SD is calculated using Moving Windows method (MW) applied to PC1
 # MW 3x3
-pc1_sd <- focal(ndvi_pca[[1]], w = matrix(1/9, 3, 3), fun = sd)
-plot(pc1_sd, main = "Local SD of PC1", col = viridis(100))
+pc1_sd <- focal(ndvi_pca$PC1, w = matrix(1/9, 3, 3), fun = sd)
+plot(pc1_sd, main = "Local SD of PC1 3x3 MW", col = viridis)
 
 # MW 7x7 
-pc1_sd <- focal(ndvi_pca[[1]], w = matrix(1/49, 7, 7), fun = sd)
-plot(pc1_sd, main = "Local SD of PC1", col = viridis(100))
+pc1_sd <- focal(ndvi_pca$PC1, w = matrix(1/49, 7, 7), fun = sd)
+plot(pc1_sd, main = "Local SD of PC1 7x7 MW", col = viridis)
 
-# higher values=> higher local variability=> potentially at risk 
-# lower values=> stable areas0> higher potential of stable recovery 
-# MW 3x3 better resolution but less accetuated spectral varibility
-# with MW 7x7 contrasts are clearer
+# Higher values of SD => higher local variability => potentially at risk areas
+# Lower values of SD => stable areas => greater potential of consistent recovery 
+# 3x3 MW provides better spatial resolution but less pronounced spectral varibility
+# 7x7 MW enhances contrast, making spatial patterns of variability more evident
 
 # Conclusions:
-# significative recovery of vegetation as shown by PC1 
-# NDVI between 23 and 24 varies significantly due to fires as shown by PC2
+# - Wildfire damaged ~25% of Evros area in August 2023.
+# - NBR maps burn severity effectively.
+# - NDVI shows vegetation decline in 2024 and partial recovery in 2025.
+# - PCA highlights main vegetation trends and fire impact across time. 
+# - Local SD identifies areas with high variability and recovery potential.
+# - Multitemporal analysis is key for monitoring fire effects and vegetation recovery.
+
