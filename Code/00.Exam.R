@@ -41,7 +41,7 @@ im.plotRGB(stack_ago2,1,2,3, title="28 August") # plot it in RGB
 dev.off ()
 
 # In general, to analyse images after wildfire NBR index is used
-# NBR (Normalized Burn Ratio) is a normalized index using SWIR and NIR bands
+# NBR (Normalized Burn Ratio) is a normalized index that uses SWIR and NIR bands
 # SWIR (Short-Wave InfraRed) shows high reflectance on burnt areas and low reflectance of healthy vegetation.
 
 # Import bands to get images so composed:
@@ -67,15 +67,15 @@ im.plotRGB(stack_swir1,1,2,3, title="8 August in SWIR")
 im.plotRGB(stack_swir2,1,2,3, title="28 August in SWIR") 
 dev.off ()
 
-# 8 August
+# Get NBR for 8 August
 diff_1= stack_swir1[[2]] - stack_swir1[[1]] # NIR - SWIR
 sum_1= stack_swir1[[2]] + stack_swir1[[1]] # NIR + SWIR
-NBR_1=(diff_1)/(sum_1) # Get NBR for 8 August
+NBR_1=(diff_1)/(sum_1) 
 
-# 28 August
+# Get NBR for 28 August
 diff_2= stack_swir2[[2]] - stack_swir2[[1]] # NIR - SWIR
 sum_2= stack_swir2[[2]] + stack_swir2[[1]] # NIR + SWIR
-NBR_2=(diff_2)/(sum_2) # Get NBR for 28 August
+NBR_2=(diff_2)/(sum_2) 
 
 # Visualize images in a stacksent array
 stackNBR <- c(NBR_1,NBR_2)
@@ -83,10 +83,12 @@ names(stackNBR) <- c("8 August", "28 August")
 plot(stackNBR, col=viridis, axes=FALSE)
 
 # Delta NBR (dNBR) is used to evaluate burn severity
-dNBR= (NBR_1) - (NBR_2)
-plot(dNBR, col=viridis, main="dNBR")
+# Higher positive dNBR values indicate greater burn severity.
+dNBR= (NBR_1) - (NBR_2) # Difference Pre - Post indicates high severity
+plot(dNBR, col=viridis, main="dNBR") # Graph highlighting burnt area 
 
 # Function im.classify() is used to identify three levels of damage 
+# dNBR CLassification 
 classdnbr<- im.classify(dNBR, num_clusters= 3)
 class.names<- c("Heavily damaged areas", "Moderately damaged areas", "No damage") 
 plot(classdnbr, main="Wildfire Damage Classification", type="classes", levels=class.names, col=viridis, axes=FALSE)
@@ -101,7 +103,7 @@ perc
 # Heavily damaged areas = 13%
 # Moderately damaged areas = 12% 
 # No damage = 75%
-# So, almost 25% of the area visible in the image has been damaged by wildfires in August
+# So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023
 ----------------------------------------------------------------------------------------
 # now use ndvi to see how the vegetation is responding to the impact in two following years
 # we expect that NDVI from June 2023 is higher than NDVI June 2024 but also than 2025. 
