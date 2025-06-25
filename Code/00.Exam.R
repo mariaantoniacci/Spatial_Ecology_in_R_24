@@ -231,7 +231,7 @@ DF # Recall to see the dataframe
 
 ggj23<- ggplot(tabout, aes(x=class, y=june23)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) +
+    scale_fill_manual(values=c("Healthy vegetation"="#FDE725FF", "Damaged vegetation and Artificial areas"="#440154FF")) +
     ylim (c(0,100)) + ggtitle("June 2023") + ylab("%") +
     theme(plot.title=element_text(face="bold", hjust= 0.5), legend.position="none",
           axis.title.x = element_blank(),
@@ -240,7 +240,7 @@ ggj23<- ggplot(tabout, aes(x=class, y=june23)) +
 
 ggj24 <- ggplot(tabout, aes(x=class, y=june24)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) +
+    scale_fill_manual(values=c("Healthy vegetation"="#FDE725FF", "Damaged vegetation and Artificial areas"="#440154FF")) +
     ylim (c(0,100)) + ggtitle("June 2024") + ylab("%") +
     theme(plot.title=element_text(face="bold", hjust= 0.5), legend.position="none",
           axis.title.x = element_blank(),
@@ -249,7 +249,7 @@ ggj24 <- ggplot(tabout, aes(x=class, y=june24)) +
 
 ggj25 <- ggplot(tabout, aes(x=class, y=june25)) +
     geom_bar(stat="identity", aes(fill=class), alpha=1) + 
-    scale_fill_manual(values=c("Healthy vegetation"="darkolivegreen", "Damaged vegetation and Artificial areas"="firebrick")) + 
+    scale_fill_manual(values=c("Healthy vegetation"="#FDE725FF", "Damaged vegetation and Artificial areas"="#440154FF")) + 
     ylim (c(0,100)) + ggtitle("June 2025") + ylab("%") + 
     theme(plot.title=element_text(face="bold", hjust= 0.5),
           axis.title.x = element_blank(),
