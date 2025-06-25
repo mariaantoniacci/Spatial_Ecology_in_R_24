@@ -91,7 +91,7 @@ dNBR= (NBR_1) - (NBR_2) # Difference Pre - Post indicates high severity
 plot(dNBR, col=viridis, main="dNBR") # Graph highlighting burnt area 
 
 # Function im.classify() is used to identify three levels of damage 
-# CLassification based on dNBR
+# Classification based on dNBR
 classdnbr<- im.classify(dNBR, num_clusters= 3)
 class.names<- c("Severely damaged areas", "Moderately damaged areas", "No damage") 
 plot(classdnbr, main="Wildfire Damage Classification", type="classes", levels=class.names, col=viridis, axes=FALSE)
@@ -106,12 +106,9 @@ perc
 # Severely damaged areas = 13%
 # Moderately damaged areas = 12% 
 # No damage = 75%
-# So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023
+# So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023.
 
-## 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using the Normalized Difference Vegetation Index (NDVI)
-
-# NDVI is used to assess how the vegetation is responding to the impact in two following years
-# Expectations: NDVI in June 2023 is higher than NDVI in June 2024 but also in 2025. 
+## 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using NDVI
 
 # June 2023 
 b2j1<- rast("b2_j1.tiff") # B
@@ -151,13 +148,15 @@ b8j3<- rast("b8_j3.tiff")
 stack_j3fc<- c(b8j3, b4j3, b3j3) 
 
 # Calculation of spectral indices for vegetation
-# DVI - Difference Vegetation Index (NIR - RED)
+# NDVI is used to assess how vegetation responds to disturbance caused by fire over time
+# Expectations: NDVI in June 2023 is higher than NDVI in June 2024 but also in 2025. 
+
+# DVI (Difference Vegetation Index) = NIR - RED
 dvi1= stack_j1fc[[1]] - stack_j1fc[[2]]
 dvi2= stack_j2fc[[1]] - stack_j2fc[[2]]
 dvi3= stack_j3fc[[1]] - stack_j3fc[[2]]
 
 # NDVI = DVI / (NIR + RED)
-# NDVI is used to assess the state of vegetation 
 ndvi1= dvi1/ (stack_j1fc[[1]] + stack_j1fc[[2]])
 ndvi2= dvi2/ (stack_j2fc[[1]] + stack_j2fc[[2]])
 ndvi3= dvi3/ (stack_j3fc[[1]] + stack_j3fc[[2]])
@@ -169,7 +168,7 @@ plot(ndvi2, col=viridis, main="June 2024", axes=FALSE)
 plot(ndvi3, col=viridis, main="June 2025", axes=FALSE)
 title("NDVI Comparison", outer=TRUE, cex.main=2)
 
-# Classification on NDVI 
+# NDVI-based Classification
 # June 2023
 cl1<- im.classify(ndvi1, num_clusters=2)
 cl.names<- c("Healthy vegetation", "No vegetation or Artificial areas")
