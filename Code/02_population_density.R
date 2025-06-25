@@ -85,7 +85,7 @@ plot(densitymap, col=cl)
 # let's increase the amount of gradients 
 cl <- colorRampPalette(c("red", "orange", "yellow")) (100)
 
-# exercise: change teh color ramp palette using different colors 
+# exercise: change the colorRampPalette using different colors 
 # search colors in R Columbia university for gradients
 
 # exercise: build a multiframe and plot the densitymapwith two different color ramp palette
