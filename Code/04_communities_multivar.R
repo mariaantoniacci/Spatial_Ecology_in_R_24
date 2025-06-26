@@ -15,11 +15,11 @@ head(dune) # first 6 lines restricted for each sample 6 plots
 
 View(dune) # to see back the whole table; remember capital letter V
 
-# in the package vegan the analysis is fast and simple with function decorana of the dataset dune.
+# in the package vegan, the analysis is fast and simple with function decorana of the dataset dune.
 # help: performs detrended correspondence analysis (DCA) 
 # and basic reciprocal averaging 
 # or orthogonal correspondence analysis.
-# it is a DCA and basic reciprocal avaraging
+# it is a DCA and basic reciprocal avaraging we are looking at
 # useful when the range is quite spread out and wide, it compacts mathemathically the data
 # reducing dimensions and widespread of data
 
