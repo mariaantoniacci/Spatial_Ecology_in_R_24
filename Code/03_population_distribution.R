@@ -13,7 +13,7 @@ library(terra)
 
 sistem.file() # finds names of files in package for example the external folder
 
-system.file("external") # """ because i'm extracting a folder 
+system.file("external") # "" because i'm extracting a folder 
 
 # in external i have many dataset, i want one of them called species.shp
 
@@ -35,7 +35,9 @@ vect(file)
 # assign the function to an obj
 rana <- vect(file)
 rana 
-# we obtain a series of info class spatvect, geometry (i could have points, vectors or polygones)
+# we obtain a series of info class spatvect
+# Spatvect is an object from terra that shows vectorial spatial data as points, vectors or polygones 
+
 # in the file there's a table: for each point i have data occurance (1)/not occurance (0) for each species
 # i know whether in point i, j, n, rana is present or not
 
