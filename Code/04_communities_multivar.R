@@ -1,6 +1,6 @@
-# community level
+# Community level
 
-# code for multivariate analysis of species x plot data in communities
+# Code for multivariate analysis of species x plot data in communities
 
 # install package vegan from CRAN  
 
@@ -9,29 +9,32 @@ library(vegan)
 
 data(dune)
 
-dune 
-# i obtain the matrix 
-
+dune # i obtain the matrix
+ 
 head(dune) # first 6 lines restricted for each sample 6 plots 
 
 View(dune) # to see back the whole table; remember capital letter V
 
-# in the package vegan the analysis is fast and simple with function decorana of the dataset dune: 
-# from help: Performs detrended correspondence analysis and basic reciprocal averaging or orthogonal correspondence analysis.
-# it is a detrended corresposndace analysis and basic reciprocal avaraging
-# useful when the range is quite spread out and wide, it compacts mathemathically the data reducimg dimensions and widespread of data
+# in the package vegan the analysis is fast and simple with function decorana of the dataset dune.
+# help: performs detrended correspondence analysis (DCA) 
+# and basic reciprocal averaging 
+# or orthogonal correspondence analysis.
+# it is a DCA and basic reciprocal avaraging
+# useful when the range is quite spread out and wide, it compacts mathemathically the data
+# reducing dimensions and widespread of data
 
 # Analysis
 decorana(dune)
 multivar <- decorana(dune) 
-# the original set is compressedd to 4 axis 
+
+# the original set is compressed to 4 axis 
 # writing decorana(dune) we obtain 4 axes (DCA1,2,3,4) 
 
 dca1 = 3.7004
 
-# each DCA is the length of axis representing the whle dataset
-# the length is the amount of range represented by the axis. 
-# the aim is to see the percentage of the original range which is incorporated in 2 axes. 
+# each DCA is the length of axis representing the whole dataset
+# the length is the amount of range variability represented by the axis. 
+# the aim is to see the percentage of the original range variability incorporated in 2 axes. 
 # the maximum amount of axis we can use is 3 because our brains work in 3 dimensions.
 
 # 4 axes of lenghts x (amount of range represented by the first axis)
@@ -64,7 +67,7 @@ perc4 = prop4*100
 # Whole amouont of variability in %
 perc1 + perc2
 
-# instead of using 20 diffrent plots i compact dataset to a final set of two axes 
+# instead of using 20 different plots i compact dataset to a final set of two axes 
 # loss is 29% of the original information but it does worth it 
 
 # the first two axes explain 71% of the variability 
