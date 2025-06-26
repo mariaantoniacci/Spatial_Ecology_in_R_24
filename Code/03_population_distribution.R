@@ -24,7 +24,7 @@ system.file("external/species.shp")
 # since external is used to be in all folders let's write which package we want the external from:
 
 file <- system.file("external/species.shp", package="sdm")
-[1] "C:/Users/anton/AppData/Local/R/win-library/4.4/sdm/external/species.shp"
+ # [1] "C:/Users/anton/AppData/Local/R/win-library/4.4/sdm/external/species.shp"
 
 # translate the shp file in a type of file R can use in vector
 # the function is needed because shp cannot be read by R
