@@ -1,9 +1,10 @@
-\documentclass{beamer} % Presentation in Latex
-\usepackage{graphicx} % Required for inserting images
-\usepackage{hyperref} % Hypertext link 
 
-\usetheme{Frankfurt} % style 
-\usecolortheme{spruce} % color
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref} % per i collegamenti ipertestuali
+
+\usetheme{Frankfurt} % stile della presentazione
+\usecolortheme{spruce} % colore
 
 \title{Wildfires in Evros region, Greece}
 \author{Maria Antoniacci}
@@ -12,37 +13,38 @@
 
 \begin{document}
 
-\maketitle 
+\maketitle
 
 \AtBeginSection[]
 {
 \begin{frame}{Outline}
 \tableofcontents[currentsection]
 \end{frame}
-} % To see outline at evry new section
+} % ad ogni sezione nuova mi fa vedere l'outline
 
-\section{Introduction} % 1° section
+\section{Introduction} % 1° sezione
 
 \begin{frame}{2023 Wildfires in Greece}
 
-\begin{columns} % To have more than one
+\begin{columns}
 
     \begin{column}{0.65\textwidth}
     \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{map.jpg}
-   \end{figure}
-   
-    \begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{ansa.jpg}
+    \end{figure}
+    
+     \begin{figure}
+     \centering
+     \includegraphics[width=0.6\linewidth]{ansa.jpg}
     
     {\tiny{Source: Sentinel-2, processed by ESA, 2023.}}
    \end{figure}  
+    
     \end{column}
 
     \begin{column}{0.5\textwidth}
-        \scriptsize In \textbf{August 2023},a massive \textbf{wildfire}\\ broke out in the \textbf{Evros} region of northeastern Greece,\reaching Alexandroupolis.
+        \scriptsize In \textbf{August 2023}, a massive \textbf{wildfire}\\ broke out in the \textbf{Evros} region of northeastern Greece,\reaching Alexandroupolis.
         
         \bigskip
         Approximately \textbf{80,000 hectares}\\ of land were burned, including\\ the forest within the Dadia - Lefkimi - Soufli Forest National Park.
@@ -53,7 +55,6 @@
     \end{column}
     
 \end{columns}
-
 \end{frame}
 
 \section{Objectives} % 2° sezione
@@ -98,28 +99,28 @@
 \begin{frame}{Main functions}
 \bigskip
 \begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{itemize}
-    \item    \texttt{library()} 
-    \item    \texttt{setwd()} 
-    \item    \texttt{rast()} 
-    \item    \texttt{im.plotRGB()}
-    \item    \texttt{plot()}
-    \item    \texttt{par()}
-    \item    \texttt{viridis()}
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}  
- \begin{itemize}
-    \item    \texttt{im.classify()}
-    \item    \texttt{freq()} and \texttt{ncell()}
-    \item    \texttt{data.frame()}
-    \item    \texttt{ggplot()}
-    \item    \texttt{patchwork()}
-    \item    \texttt{im.pca()} 
-    \item    \texttt{focal()}
+    \begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item    \texttt{library()} 
+        \item    \texttt{setwd()} 
+        \item    \texttt{rast()} 
+        \item    \texttt{im.plotRGB()}
+        \item    \texttt{plot()}
+        \item    \texttt{par()}
+        \item    \texttt{viridis()}
     \end{itemize}
-\end{column}
+    \end{column}
+    \begin{column}{0.5\textwidth}  
+     \begin{itemize}
+        \item    \texttt{im.classify()}
+        \item    \texttt{freq()} and \texttt{ncell()}
+        \item    \texttt{data.frame()}
+        \item    \texttt{ggplot()}
+        \item    \texttt{patchwork()}
+        \item    \texttt{im.pca()} 
+        \item    \texttt{focal()}
+        \end{itemize}
+    \end{column}
 \end{columns}
 \end{frame}
 
@@ -186,15 +187,15 @@ Higher positive dNBR values indicate greater \textbf{burn severity}.
          \item Moderately damaged=12\%
          \item No damage=75\%
          \end{itemize}
- \end{column} 
+    \end{column} 
 
-\begin{column}[t]{0.80\textwidth}
+    \begin{column}[t]{0.80\textwidth}
             \centering
             \begin{figure}
             \includegraphics[width=1\linewidth]{dNBR_CLASSIFICATION.jpeg}  
             \end{figure}
- \end{column} 
- \end{columns}
+    \end{column} 
+\end{columns}
 \end{frame}
 
 \section{Analysis - 2} 
@@ -230,22 +231,22 @@ NDVI-based classification helps visualize vegetation dynamics over three years b
 
 \begin{columns}
 
-\begin{column}{0.6\textwidth}
-
-\begin{figure}
-    \centering
-            \includegraphics[width=1\linewidth]{ClassJUNE.jpeg}  
-    \end{figure}
+    \begin{column}{0.6\textwidth}
+    
+        \begin{figure}
+        \centering
+                \includegraphics[width=1\linewidth]{ClassJUNE.jpeg}  
+        \end{figure}
     \end{column}
 
-\begin{column}{0.4\textwidth}
-Percentages of vegetation in good condition over the years: \begin{itemize}
-        \item June 2023: 71\%
-        \item June 2024: 44\%
-        \item June 2025: 59\%
-    \end{itemize}
-    \bigskip
-The data suggest that \textbf{vegetation is slowly recovering}.
+    \begin{column}{0.4\textwidth}
+    Percentages of vegetation in good condition over the years: \begin{itemize}
+            \item June 2023: 71\%
+            \item June 2024: 44\%
+            \item June 2025: 59\%
+        \end{itemize}
+        \bigskip
+    The data suggest that \textbf{vegetation is slowly recovering}.
     \end{column}
 
 \end{columns}
@@ -271,19 +272,19 @@ The data suggest that \textbf{vegetation is slowly recovering}.
 \bigskip
 
 \begin{columns}
-\begin{column}{0.6\textwidth}
-\begin{figure}
-    \centering
-        \includegraphics[width=1\linewidth]{SD 3X3.jpeg}  
-\end{figure}
-\end{column}
+    \begin{column}{0.6\textwidth}
+    \begin{figure}
+        \centering
+            \includegraphics[width=1\linewidth]{SD 3X3.jpeg}  
+    \end{figure}
+    \end{column}
 
-\begin{column}{0.6\textwidth}
-\begin{figure}
-    \centering
-        \includegraphics[width=1\linewidth]{SD 7X7.jpeg}  
-\end{figure}
-\end{column}
+    \begin{column}{0.6\textwidth}
+    \begin{figure}
+        \centering
+            \includegraphics[width=1\linewidth]{SD 7X7.jpeg}  
+    \end{figure}
+    \end{column}
 
 \end{columns}
 
