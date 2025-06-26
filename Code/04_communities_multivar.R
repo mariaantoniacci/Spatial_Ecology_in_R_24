@@ -1,6 +1,6 @@
 # Community level
 
-# Code for multivariate analysis of species x plot data in communities
+# Code for multivariate analysis of species to plot data in communities
 
 # install package vegan from CRAN  
 
