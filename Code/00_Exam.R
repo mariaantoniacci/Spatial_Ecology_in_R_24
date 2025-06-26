@@ -34,7 +34,7 @@ b3_ago2<- rast("b3_ago2.tiff") # Green
 b4_ago2<- rast("b4_ago2.tiff") # Red
 stack_ago2<- c(b4_ago2, b3_ago2, b2_ago2) # create a stack
 
-# Display the images in a layout 1-row and 2-colums using par(mfrow=) plotting in RGB
+# Multiframe using par(mfrow=): layout is  1-row and 2-colums
 par(mfrow= c(1,2))
 im.plotRGB(stack_ago1,1,2,3, title="8 August") # plot it in RGB 
 im.plotRGB(stack_ago2,1,2,3, title="28 August") # plot it in RGB
@@ -61,7 +61,7 @@ nir_ago2<- rast("nir_ago2.tiff") # NIR
 b4_ago2<- rast("b4_ago2.tiff") # red
 stack_swir2<- c(b12_ago2, nir_ago2, b4_ago2) # create a stack
 
-# Display side by side plotting in RGB
+# Multiframe
 par(mfrow=c(1,2))
 im.plotRGB(stack_swir1,1,2,3, title="8 August in SWIR") 
 im.plotRGB(stack_swir2,1,2,3, title="28 August in SWIR") 
@@ -161,7 +161,7 @@ ndvi1= dvi1/ (stack_j1fc[[1]] + stack_j1fc[[2]])
 ndvi2= dvi2/ (stack_j2fc[[1]] + stack_j2fc[[2]])
 ndvi3= dvi3/ (stack_j3fc[[1]] + stack_j3fc[[2]])
 
-# Comparison of images side by side
+# Comparison of images in a multiframe
 par(mfrow=c(1,3), mar=c(5,2,10,2), oma=c(0,0,10,0))
 plot(ndvi1, col=viridis, main="June 2023", axes=FALSE)
 plot(ndvi2, col=viridis, main="June 2024", axes=FALSE)
@@ -184,7 +184,7 @@ cl3<- im.classify(ndvi3, num_clusters=2)
 cl.names3<- c("Healthy vegetation", "Damaged vegetation and Artificial areas")
 plot(cl3, main= "June 2025", type="classes", levels=cl.names3, col=viridis, axes=FALSE)
 
-# Display in par(mfrow=)
+# Display with par(mfrow=)
 par(mfrow=c(1,3), mar=c(5,2,10,2) + c(2,5,2,0)) # Adjust margins and add space for legend and title
 plot(cl1, main= "June 2023", type="classes", levels=cl.names, col=viridis(2), axes=FALSE, legend=FALSE)
 plot(cl2, main= "June 2024", type="classes", levels=cl.names2, col=viridis(2), axes=FALSE, legend=FALSE)
