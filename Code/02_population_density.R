@@ -4,6 +4,8 @@
 # let's use the function
 install.packages("spatstat") # "" protects from exit R in and out of package
 
+# Spatstat is a package for spatial statistics, particularly for analysis of spatial poing patterns
+
 # to use the package library () without quotes because it's already in R now
 # recalling the package
 library(spatstat)
