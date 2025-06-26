@@ -53,7 +53,7 @@ plot(rana) # points representing presence or absence of rana
 # let's use sequel (sql) language on dataset rana -> used to select some data from a dataset which is rana 
 # select all points from rana where occurrence equals 1 is translated in 
 
-pres<- rana[rana$Occurrence==1 ;]
+pres<- rana[rana$Occurrence==1 ,]
 
 # in sql language == meaning equal to while != not equal to
 # to end the input use ; 
@@ -68,7 +68,7 @@ plot(pres)
 
 # exercise: select data from rana with only absences
 # uncertainity is higher for absences due to observer bias (non so se manca davvero, mentre so se c'è perchè l'ho visto)
-abse<- rana[rana$Occurrence==0]
+abse<- rana[rana$Occurrence==0,]
 plot(abse) 
 
 # exercise: plot in a multiframe presence beside absences 
