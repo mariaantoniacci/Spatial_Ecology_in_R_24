@@ -85,11 +85,11 @@ plot(abse)
 plot(pres, col="blue") # open teh plot with presence and then 
 points(abse, col="red", pch=19, cex=2) # use points to highlight absences
 
-# Covariates, why species distributed in a certain manner?
+# Covariates: why species distribute in a certain manner?
 # let's considerate the variable elevation 
 # ascii related to raster sequential file in language .asc
 
-elev <- system.file("external/elevation.asc", package="sdm") # it isn't a vector file in .shp but a raster file in .asc
+elev <- system.file("external/elevation.asc", package="sdm") # not a vector in .shp but a raster file in .asc
 # now i have the dataset elev which is raster so i use rast() to make it okay for R
 elevmap <- rast(elev)
 
