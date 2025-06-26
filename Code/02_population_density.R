@@ -4,7 +4,7 @@
 # let's use the function
 install.packages("spatstat") # "" protects from exit R in and out of package
 
-# Spatstat is a package for spatial statistics, particularly for analysis of spatial poing patterns
+# Spatstat is a package for spatial statistics, particularly for analysis of spatial point patterns
 
 # to use the package library () without quotes because it's already in R now
 # recalling the package
@@ -59,7 +59,7 @@ points(bei) # puts points on prevoius graph plot (densitymap)
 points(bei, col="green")
 
 ######DAY2
-# multiframe with par.function
+# multiframe with function par(mfrow=)
 
 par(mfrow=c(1,2)) # 1 and 2 are elements of the same arrow 
 
@@ -69,7 +69,7 @@ plot(elevation2)
 plot(densitymap)
 # the order is set like this sx elev2 a dx density
 # if i want one above the other i'd have 2 rows and 1 coloumn
- par(mfrow=c(2,1))
+par(mfrow=c(2,1))
 
 #if i want again just one map at the centre of the screen and not above or at a side
 # i use dev.off() control multiple devides. destroys the device null device
