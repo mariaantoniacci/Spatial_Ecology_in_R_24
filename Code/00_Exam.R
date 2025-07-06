@@ -262,45 +262,20 @@ ggj23 + ggj24 + ggj25
 
 dev.off()
 
-# Measuring spectral variability from June 2023 to June 2025
-# High variability can be associated to habitat fragmentation and landscape heterogeneity caused by wildfires 
 
-# PCA (Principal Component Analyses) to extract the most informative component explaning variability
-# PCA is based on NDVI values
-# The approach is useful for visualizing fire impact and vegetation recovery in a single map
+# NDVI differences are calculated to analyze vegetation loss and recovery following the 2023 wildfire in Alexandroupolis.
+# The 2023–2024 and 2024–2025 differences highlight annual recovery dynamics.
+# The 2023–2025 difference captures the net vegetation change two years after the fire.
 
-# Combining NDVI rasters from the three years into a multiband object 
-# Allows pixel-to-pixel comparison across time
+# Annual recovery dynamics
+# 2023-2024
+I<- ndvi1- ndvi2
+II<- ndvi3 - ndvi2
+Net<- ndvi1 - ndvi3
 
-ndvi_stack <- c(ndvi1, ndvi2, ndvi3)
-names(ndvi_stack) <- c("NDVI_2023", "NDVI_2024", "NDVI_2025") # Assign layer names for clarity
-
-# Perform PCA across NDVI layers
-ndvi_pca <- im.pca(ndvi_stack)
-
-#               PC1         PC2        
-# NDVI_2023 0.5799648  0.76215215  
-# NDVI_2024 0.6150644 -0.64122968  
-# NDVI_2025 0.5341691 -0.08915495 
-
-# PC1 shows dominant trends across time:
-# If PC1 shows light areas => High NDVI => healthy or recovering vegetation 
-# If PC1 shows dark areas => Low NDVI => degradated vegetation.
-# PC2 reveals significative local anomalies due to wildfire consequences in 2024 (negative values) 
-
-# Display NDVI plot across time only considering PC1 and PC2
-plot(ndvi_pca[[1:2]], col=viridis, main=c("PC1", "PC2"), axes=FALSE)
-
-# Analysis of Local Standard Deviation (SD) to identify areas with higher spatial and temporal variation
-# SD is calculated using Moving Windows method (MW) applied to PC1
-# MW 3x3
-pc1_sd <- focal(ndvi_pca$PC1, w = matrix(1/9, 3, 3), fun = sd)
-plot(pc1_sd, main = "Local SD of PC1 3x3 MW", col = viridis)
-
-# MW 7x7 
-pc1_sd <- focal(ndvi_pca$PC1, w = matrix(1/49, 7, 7), fun = sd)
-plot(pc1_sd, main = "Local SD of PC1 7x7 MW", col = viridis)
-
+stackdNDVI<- c(I, II, Net)
+names(stackdNDVI) <- c("I", "II", "Net change")
+plot(stackdNDVI, col=viridis, axes=FALSE)
 # Higher values of SD => higher local variability => potentially at risk areas
 # Lower values of SD => stable areas => greater potential of consistent recovery 
 # 3x3 MW provides better spatial resolution but less pronounced spectral varibility
