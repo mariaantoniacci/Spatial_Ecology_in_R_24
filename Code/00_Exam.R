@@ -268,14 +268,18 @@ dev.off()
 # The 2023–2025 difference captures the net vegetation change two years after the fire.
 
 # Annual recovery dynamics
-# 2023-2024
+# 2024 - 2023
 I<- ndvi1- ndvi2
+# 2025 - 2024
 II<- ndvi3 - ndvi2
+# 2023 - 2025
 Net<- ndvi1 - ndvi3
 
 stackdNDVI<- c(I, II, Net)
 names(stackdNDVI) <- c("I", "II", "Net change")
 plot(stackdNDVI, col=viridis, axes=FALSE)
+
+
 # Higher values of SD => higher local variability => potentially at risk areas
 # Lower values of SD => stable areas => greater potential of consistent recovery 
 # 3x3 MW provides better spatial resolution but less pronounced spectral varibility
