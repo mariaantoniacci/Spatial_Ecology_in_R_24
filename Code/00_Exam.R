@@ -292,7 +292,5 @@ plot(j3_mw7x7, main = "Local SD of June 2025 - 7x7 MW", col = viridis)
 # - Wildfire damaged ~25% of Evros area in August 2023.
 # - NBR maps burn severity effectively.
 # - NDVI shows vegetation decline in 2024 and partial recovery in 2025.
-# - PCA highlights main vegetation trends and fire impact across time. 
 # - Local SD identifies areas with high variability and recovery potential.
-# - Multitemporal analysis is key for monitoring fire effects and vegetation recovery.
 
