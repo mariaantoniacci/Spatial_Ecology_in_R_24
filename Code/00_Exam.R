@@ -288,9 +288,13 @@ plot(j3_mw7x7, main = "Local SD of June 2025 - 7x7 MW", col = viridis)
 # Higher values of SD => higher local variability => potentially at risk areas
 # Lower values of SD => stable areas => greater potential of consistent recovery 
 
+dev.off()
+
+
+
 # Conclusions:
-# - Wildfire damaged ~25% of Evros area in August 2023.
-# - NBR maps burn severity effectively.
-# - NDVI shows vegetation decline in 2024 and partial recovery in 2025.
-# - Local SD identifies areas with high variability and recovery potential.
+# - Wildfire damaged ~25% of Evros area in August 2023
+# - NBR maps burn severity effectively
+# - NDVI shows vegetation decline in 2024 and partial recovery in 2025
+# - Local SD identifies areas with high variability and recovery potential
 
