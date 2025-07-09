@@ -7,7 +7,7 @@
 
 # The project has two objectives, addressed through two analyses:
 # 1: Assessing Pre and Post Wildfire Conditions using NBR
-# 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using NDVI
+# 2: Evaluating Vegetation Health Trends for the years 2024 and 2025 using NDVI
 
 # First, set the working directory and recall libraries 
 setwd("C:/SPATIAL ECOLOGY IN R")
@@ -108,7 +108,7 @@ perc
 # No damage = 75%
 # So, almost 25% of the area visible in the image has been damaged by wildfires in August 2023.
 
-## 2: Evaluating Vegetation Health Trends for the years 2023, 2024, and 2025 using NDVI
+## 2: Evaluating Vegetation Recovery Trends using NDVI
 
 # June 2023 
 b2j1<- rast("b2_j1.tiff") # B
