@@ -267,9 +267,7 @@ dev.off()
 
 # Computing and visualizing Local Standars Deviation of NDVI using a moving window (3x3 and 7x7 pixels) 
 # for June 2024 and 2025. 
-# The goal is to assess whether the vegetation recovery after the 2023 wildfire in Evros, is stable over time.
-# 3x3 MW provides better spatial resolution but less pronounced spectral varibility
-# 7x7 MW enhances contrast, making spatial patterns of variability more evident
+# The aim is to assess whether the vegetation recovery after the 2023 wildfire in Evros, is stable over time.
 
 # 2024
 j2_mw3x3 <- focal(ndvi2, w = matrix(1/9, 3, 3), fun = sd)
@@ -285,12 +283,10 @@ plot(j3_mw3x3, main = "Local SD of June 2025 - 3x3 MW", col = viridis)
 plot(j2_mw7x7, main = "Local SD of June 2024 - 7x7 MW", col = viridis)
 plot(j3_mw7x7, main = "Local SD of June 2025 - 7x7 MW", col = viridis)
 
-# Higher values of SD => higher local variability => potentially at risk areas
-# Lower values of SD => stable areas => greater potential of consistent recovery 
+# 3x3 MW provides better spatial resolution but less pronounced spectral varibility
+# 7x7 MW enhances contrast, making spatial patterns of variability more evident
 
 dev.off()
-
-
 
 # Conclusions:
 # - Wildfire damaged ~25% of Evros area in August 2023
