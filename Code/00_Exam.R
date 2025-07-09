@@ -1,4 +1,4 @@
-# SPATIAL ECOLOGY IN R EXAM -  Student: MARIA ANTONIACCI (SGN)
+# SPATIAL ECOLOGY IN R EXAM -  Student: MARIA ANTONIACCI (SGN) - Date: 9 July 2025
 # WILDFIRES in GREECE - August 2023 
 # In August 2023, a massive wildfire broke out in the Evros region of northeastern Greece,
 # spreading rapidly from the mountainous areas to the city of Alexandroupolis.
